@@ -7,12 +7,12 @@ export default function QuantityStepper({ value, onChange, step = 1, max, unit, 
   const atMin = value <= step;
   const atMax = value >= max;
   return (
-    <div className="inline-flex items-center rounded-full border border-brand-dark/15 bg-white" role="group" aria-label={label}>
+    <div className="inline-flex items-center rounded-full border border-heading/15 bg-surface" role="group" aria-label={label}>
       <button
         type="button"
         onClick={() => onChange(Math.max(step, round3(value - step)))}
         disabled={atMin}
-        className="flex h-10 w-10 items-center justify-center rounded-full text-brand-dark transition hover:bg-brand-light disabled:opacity-30"
+        className="flex h-10 w-10 items-center justify-center rounded-full text-heading transition hover:bg-tint disabled:opacity-30"
         aria-label="Уменьшить количество"
       >
         <Minus size={16} />
@@ -24,7 +24,7 @@ export default function QuantityStepper({ value, onChange, step = 1, max, unit, 
         type="button"
         onClick={() => onChange(Math.min(max, round3(value + step)))}
         disabled={atMax}
-        className="flex h-10 w-10 items-center justify-center rounded-full text-brand-dark transition hover:bg-brand-light disabled:opacity-30"
+        className="flex h-10 w-10 items-center justify-center rounded-full text-heading transition hover:bg-tint disabled:opacity-30"
         aria-label="Увеличить количество"
       >
         <Plus size={16} />

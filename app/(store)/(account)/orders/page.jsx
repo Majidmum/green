@@ -39,11 +39,11 @@ export default async function OrdersPage({ searchParams }) {
 
   return (
     <div>
-      <h1 className="mb-6 font-display text-4xl font-bold text-brand-dark">Мои заказы</h1>
+      <h1 className="mb-6 font-display text-4xl font-bold text-heading">Мои заказы</h1>
       <div className="mb-5 flex flex-wrap gap-2">
         {TABS.map((t) => (
           <Link key={t.key} href={t.key ? `/orders?status=${t.key}` : "/orders"} aria-current={tab === t.key ? "page" : undefined}
-            className={`rounded-full px-4 py-2 text-sm font-medium ${tab === t.key ? "bg-brand text-white" : "bg-white shadow-soft hover:bg-brand-light"}`}>
+            className={`rounded-full px-4 py-2 text-sm font-medium ${tab === t.key ? "bg-brand text-white" : "bg-surface shadow-soft hover:bg-tint"}`}>
             {t.label}
           </Link>
         ))}
@@ -52,7 +52,7 @@ export default async function OrdersPage({ searchParams }) {
       {!orders?.length ? (
         <div className="card flex flex-col items-center gap-3 p-12 text-center">
           <Package size={40} className="text-brand/50" />
-          <p className="text-brand-ink/70">{tab ? "Заказов с таким статусом нет" : "Вы ещё ничего не заказывали"}</p>
+          <p className="text-body/70">{tab ? "Заказов с таким статусом нет" : "Вы ещё ничего не заказывали"}</p>
           <Link href="/catalog" className="btn-primary">Перейти в каталог</Link>
         </div>
       ) : (
@@ -62,7 +62,7 @@ export default async function OrdersPage({ searchParams }) {
               <Link href={`/orders/${o.id}`} className="card flex flex-wrap items-center justify-between gap-3 p-5 transition hover:shadow-lift">
                 <div>
                   <p className="font-semibold">№ {o.order_number}</p>
-                  <p className="text-sm text-brand-ink/60">
+                  <p className="text-sm text-body/60">
                     {formatDate(o.created_at)} · {o.order_items.length} {plural(o.order_items.length, ["позиция", "позиции", "позиций"])} · {o.delivery_type === "delivery" ? "доставка" : "самовывоз"}
                   </p>
                 </div>

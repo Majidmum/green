@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Banknote, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import {
+  ArrowRight, Banknote, Clock, Flame, Grid2x2, Leaf, Mail, MapPin, MessageCircle, MessagesSquare, Phone, ShieldCheck,
+  ShoppingBasket, Sparkles, Store, Truck, UserRound,
+} from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import HeroVisual from "@/components/animations/HeroVisual";
 import ProductCard from "@/components/store/ProductCard";
@@ -11,16 +14,16 @@ const wrap = "mx-auto max-w-7xl px-4 sm:px-6";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-light/70 to-brand-cream">
+    <section className="relative overflow-hidden bg-gradient-to-b from-tint/70 to-page">
       <div className={`${wrap} grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-20`}>
         <div>
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-brand shadow-soft">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-sm font-medium text-brand shadow-soft">
             <Sparkles size={15} /> Доставка по Душанбе
           </p>
-          <h1 className="font-display text-5xl font-bold leading-[1.05] text-brand-dark sm:text-6xl lg:text-7xl">
+          <h1 className="font-display text-5xl font-bold leading-[1.05] text-heading sm:text-6xl lg:text-7xl">
             GREEN GARDEN
           </h1>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-brand-ink/75">
+          <p className="mt-5 max-w-lg text-lg leading-relaxed text-body/75">
             Свежие фрукты, овощи, ягоды и зелень. Выбирайте онлайн — мы привезём к вам домой или подготовим к самовывозу.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -41,7 +44,7 @@ export function Hero() {
 export function SectionHeading({ title, href, linkLabel = "Смотреть все" }) {
   return (
     <div className="mb-8 flex items-end justify-between gap-4">
-      <h2 className="font-display text-3xl font-bold text-brand-dark sm:text-4xl">{title}</h2>
+      <h2 className="font-display text-3xl font-bold text-heading sm:text-4xl">{title}</h2>
       {href && (
         <Link href={href} className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-brand hover:underline">
           {linkLabel} <ArrowRight size={16} />
@@ -81,10 +84,10 @@ export function CategoryGrid({ categories }) {
               href={`/catalog?category=${c.slug}`}
               className="card group flex flex-col items-center gap-3 p-6 text-center transition hover:-translate-y-1 hover:shadow-lift"
             >
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-light text-brand transition group-hover:bg-brand group-hover:text-white">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-tint text-brand transition group-hover:bg-brand group-hover:text-white">
                 <CategoryIcon slug={c.slug} className="h-8 w-8" />
               </span>
-              <span className="font-semibold text-brand-ink">{c.name}</span>
+              <span className="font-semibold text-body">{c.name}</span>
             </Link>
           ))}
         </div>
@@ -158,11 +161,11 @@ export function Benefits() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {BENEFITS.map(({ Icon, title, text }) => (
             <div key={title} className="card p-6">
-              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-light text-brand">
+              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-tint text-brand">
                 <Icon size={24} />
               </span>
-              <h3 className="font-semibold text-brand-ink">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{text}</p>
+              <h3 className="font-semibold text-body">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-body/70">{text}</p>
             </div>
           ))}
         </div>
@@ -216,6 +219,122 @@ export function DeliveryBlock({ zones }) {
               ))}
             </ul>
           )}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+// ---- Блоки в стиле «компания и сервисы» ----
+
+const SERVICES = [
+  { Icon: ShoppingBasket, tag: "Онлайн-магазин", title: "Каталог товаров", text: "Фрукты, овощи, ягоды, зелень и орехи с актуальными ценами и остатками.", href: "/catalog" },
+  { Icon: Grid2x2, tag: "Каталог", title: "Категории", text: "Быстрый выбор по разделам: от цитрусовых до свежей зелени.", href: "/categories" },
+  { Icon: Flame, tag: "Акции", title: "Скидки и предложения", text: "Товары со скидкой и специальные предложения магазина.", href: "/catalog?sale=1" },
+  { Icon: Sparkles, tag: "Новое", title: "Новинки", text: "Свежие поступления и сезонные продукты, которые только что появились.", href: "/catalog?sort=new" },
+  { Icon: Truck, tag: "Доставка", title: "Доставка по Душанбе", text: "Курьер привезёт заказ по вашему адресу. Зоны и стоимость — в условиях доставки.", href: "/delivery" },
+  { Icon: Store, tag: "Самовывоз", title: "Заберите сами", text: "Оформите заказ онлайн и заберите его в удобное время.", href: "/delivery" },
+  { Icon: UserRound, tag: "Личный кабинет", title: "Заказы и адреса", text: "История заказов, статус в реальном времени, адреса и избранное.", href: "/profile" },
+  { Icon: MessagesSquare, tag: "Отзывы", title: "Мнение покупателей", text: "Читайте отзывы о товарах и делитесь своими с фотографиями.", href: "/reviews" },
+  { Icon: Leaf, tag: "О компании", title: "О Green Garden", text: "Кто мы, как отбираем продукцию и почему нам доверяют.", href: "/about" },
+];
+
+export function ServicesGrid() {
+  return (
+    <section className={`${wrap} pt-20`}>
+      <Reveal>
+        <div className="mb-8 max-w-2xl">
+          <h2 className="font-display text-3xl font-bold text-heading sm:text-4xl">Green Garden — все сервисы в одном месте</h2>
+          <p className="mt-3 text-body/70">Магазин, доставка, самовывоз, акции и личный кабинет — выберите то, что нужно сегодня.</p>
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+          {SERVICES.map(({ Icon, tag, title, text, href }) => (
+            <Link key={title} href={href} className="card group flex flex-col p-4 transition hover:-translate-y-1 hover:shadow-lift sm:p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-brand sm:text-xs">{tag}</span>
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-tint text-brand transition group-hover:bg-brand group-hover:text-white">
+                  <Icon size={20} />
+                </span>
+              </div>
+              <h3 className="text-base font-semibold text-heading sm:text-lg">{title}</h3>
+              <p className="mt-2 hidden flex-1 text-sm sm:block leading-relaxed text-body/70">{text}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand sm:mt-4">
+                Подробнее <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+// Цифры берутся из базы: число товаров, категорий и зон доставки
+export function StatsBand({ products, categories, zones }) {
+  const items = [
+    { value: products, label: "товаров в каталоге" },
+    { value: categories, label: "категорий" },
+    { value: zones, label: "зон доставки" },
+  ].filter((i) => i.value > 0);
+  if (!items.length) return null;
+  return (
+    <section className={`${wrap} pt-20`}>
+      <Reveal>
+        <div className="grid gap-6 rounded-xl3 bg-brand-dark p-8 text-white sm:grid-cols-3 md:p-12">
+          {items.map((i) => (
+            <div key={i.label} className="text-center sm:text-left">
+              <p className="font-display text-5xl font-bold text-brand sm:text-6xl">{i.value}</p>
+              <p className="mt-2 text-white/80">{i.label}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+export function ContactsBlock({ info }) {
+  const waNumber = String(info.whatsapp || "").replace(/\D/g, "");
+  const tg = String(info.telegram || "").replace(/^@/, "");
+  const rows = [
+    info.phone && { Icon: Phone, label: "Телефон", node: <a href={`tel:${info.phone}`} className="hover:text-brand">{info.phone}</a> },
+    info.email && { Icon: Mail, label: "Email", node: <a href={`mailto:${info.email}`} className="hover:text-brand">{info.email}</a> },
+    info.address && { Icon: MapPin, label: "Адрес", node: info.address },
+    info.working_hours && { Icon: Clock, label: "Время работы", node: info.working_hours },
+  ].filter(Boolean);
+  const socials = [
+    waNumber && { label: "WhatsApp", href: `https://wa.me/${waNumber}` },
+    tg && /^[A-Za-z0-9_]{3,64}$/.test(tg) && { label: "Telegram", href: `https://t.me/${tg}` },
+  ].filter(Boolean);
+  if (!rows.length && !socials.length) return null;
+  return (
+    <section className={`${wrap} pt-20`}>
+      <Reveal>
+        <div className="card grid gap-8 p-8 md:grid-cols-[1fr_1.4fr] md:p-12">
+          <div>
+            <h2 className="font-display text-3xl font-bold text-heading sm:text-4xl">Контакты</h2>
+            <p className="mt-3 text-body/70">Свяжитесь с нами — ответим на вопросы о заказе и доставке.</p>
+            {socials.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-3">
+                {socials.map((s) => (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="btn-outline !py-2.5">
+                    <MessageCircle size={16} /> {s.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2">
+            {rows.map(({ Icon, label, node }) => (
+              <li key={label} className="flex items-start gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-tint text-brand"><Icon size={20} /></span>
+                <div>
+                  <p className="text-sm text-body/60">{label}</p>
+                  <p className="font-medium text-heading">{node}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </Reveal>
     </section>

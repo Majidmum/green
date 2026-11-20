@@ -36,7 +36,7 @@ export default function OrderActions({ order }) {
     });
 
   if (finished) {
-    return <p className="text-sm text-brand-ink/60">Заказ завершён — статус изменить нельзя.{order.status === "delivered" && " Возврат товара оформляется ниже."}</p>;
+    return <p className="text-sm text-body/60">Заказ завершён — статус изменить нельзя.{order.status === "delivered" && " Возврат товара оформляется ниже."}</p>;
   }
 
   const needCourier = !pickup && ["handed_to_courier", "on_the_way"].includes(status) && !order.courier_name && !cName.trim();
@@ -74,14 +74,14 @@ export default function OrderActions({ order }) {
         {needCourier && <p className="text-xs text-amber-700">Укажите курьера перед передачей заказа.</p>}
       </div>
 
-      <div className="border-t border-brand-dark/10 pt-4">
+      <div className="border-t border-heading/10 pt-4">
         {!showCancel ? (
           <button className="text-sm font-semibold text-rose-600 hover:underline" onClick={() => setShowCancel(true)}>Отменить заказ…</button>
         ) : (
           <div className="space-y-3 rounded-2xl border border-rose-200 bg-rose-50/60 p-4">
             <label htmlFor="cr" className="block text-sm font-medium">Причина отмены</label>
             <input id="cr" className="input" maxLength={300} value={cancelReason} onChange={(e) => setCancelReason(e.target.value)} />
-            <p className="text-xs text-brand-ink/60">Товар вернётся на склад, клиент получит уведомление.</p>
+            <p className="text-xs text-body/60">Товар вернётся на склад, клиент получит уведомление.</p>
             <div className="flex gap-2">
               <button className="btn !bg-rose-600 !py-2.5 text-white hover:!bg-rose-700" disabled={pending || cancelReason.trim().length < 3}
                 onClick={() => run(() => changeOrderStatus({ orderId: order.id, status: "cancelled", note: cancelReason }), "Заказ отменён")}>Отменить заказ</button>
@@ -90,7 +90,7 @@ export default function OrderActions({ order }) {
           </div>
         )}
       </div>
-      {msg && <p className={`rounded-xl px-4 py-3 text-sm ${msg.ok ? "bg-brand-light text-brand-dark" : "bg-rose-50 text-rose-700"}`} role={msg.ok ? "status" : "alert"}>{msg.text}</p>}
+      {msg && <p className={`rounded-xl px-4 py-3 text-sm ${msg.ok ? "bg-tint text-heading" : "bg-rose-50 text-rose-700"}`} role={msg.ok ? "status" : "alert"}>{msg.text}</p>}
     </div>
   );
 }

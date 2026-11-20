@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./app/**/*.{js,jsx}",
     "./components/**/*.{js,jsx}",
@@ -15,6 +16,12 @@ module.exports = {
           cream: "#FAF8F2",
           ink: "#17231B",
         },
+        // Семантические цвета: значения меняются между светлой и тёмной темой (см. globals.css)
+        page: "rgb(var(--page) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        tint: "rgb(var(--tint) / <alpha-value>)",
+        heading: "rgb(var(--heading) / <alpha-value>)",
+        body: "rgb(var(--body) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

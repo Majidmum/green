@@ -44,30 +44,30 @@ export default function ProductCard({ product, layout = "grid", priority = false
 
       <FavoriteButton
         productId={product.id}
-        className="absolute right-2 top-2 z-10 h-8 w-8 sm:right-3 sm:top-3 sm:h-9 sm:w-9 rounded-full bg-white/90 shadow-soft hover:bg-white"
+        className="absolute right-2 top-2 z-10 h-8 w-8 sm:right-3 sm:top-3 sm:h-9 sm:w-9 rounded-full bg-surface/90 shadow-soft hover:bg-surface"
       />
 
       <div className="flex flex-1 flex-col gap-1.5 p-3 sm:gap-2 sm:p-4">
         <span className="text-xs font-medium text-brand">{product.category_name}</span>
         <Link href={href} className="focus-visible:outline-none">
-          <h3 className="text-sm font-semibold sm:text-base leading-snug text-brand-ink hover:text-brand">{product.name}</h3>
+          <h3 className="text-sm font-semibold sm:text-base leading-snug text-body hover:text-brand">{product.name}</h3>
         </Link>
         <Stars value={product.rating_avg} count={product.rating_count} />
         {list && product.description && (
-          <p className="line-clamp-2 text-sm text-brand-ink/70">{product.description}</p>
+          <p className="line-clamp-2 text-sm text-body/70">{product.description}</p>
         )}
         {product.country_of_origin && (
-          <p className="hidden text-xs text-brand-ink/60 sm:block">Происхождение: {product.country_of_origin}</p>
+          <p className="hidden text-xs text-body/60 sm:block">Происхождение: {product.country_of_origin}</p>
         )}
 
         <div className="mt-auto flex flex-wrap items-end justify-between gap-1 pt-1 sm:gap-3 sm:pt-2">
           <div>
-            <div className="text-base font-bold text-brand-dark sm:text-lg">
+            <div className="text-base font-bold text-heading sm:text-lg">
               {formatMoney(product.price)}
-              <span className="ml-1 text-xs font-normal text-brand-ink/60">/ {unitLabel(product.unit)}</span>
+              <span className="ml-1 text-xs font-normal text-body/60">/ {unitLabel(product.unit)}</span>
             </div>
             {product.old_price && Number(product.old_price) > Number(product.price) && (
-              <div className="text-sm text-brand-ink/50 line-through">{formatMoney(product.old_price)}</div>
+              <div className="text-sm text-body/50 line-through">{formatMoney(product.old_price)}</div>
             )}
           </div>
           {soldOut && <span className="text-xs font-medium text-rose-600">Нет в наличии</span>}

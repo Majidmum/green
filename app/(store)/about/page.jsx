@@ -15,8 +15,8 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-      <h1 className="font-display text-4xl font-bold text-brand-dark">О Green Garden</h1>
-      <p className="mt-6 text-lg leading-relaxed text-brand-ink/80">
+      <h1 className="font-display text-4xl font-bold text-heading">О Green Garden</h1>
+      <p className="mt-6 text-lg leading-relaxed text-body/80">
         Green Garden — интернет-магазин свежих фруктов, овощей, ягод, зелени, сухофруктов и орехов в Душанбе.
         Мы хотим, чтобы свежие продукты высокого качества были доступны каждому: выбирайте онлайн, а мы
         привезём заказ или подготовим его к самовывозу.
@@ -24,9 +24,9 @@ export default function AboutPage() {
       <div className="mt-10 grid gap-5 sm:grid-cols-3">
         {VALUES.map(({ Icon, title, text }) => (
           <div key={title} className="card p-6">
-            <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-light text-brand"><Icon size={24} /></span>
+            <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-tint text-brand"><Icon size={24} /></span>
             <h2 className="font-semibold">{title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{text}</p>
+            <p className="mt-2 text-sm leading-relaxed text-body/70">{text}</p>
           </div>
         ))}
       </div>

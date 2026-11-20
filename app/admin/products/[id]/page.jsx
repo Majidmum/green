@@ -27,11 +27,11 @@ export default async function EditProductPage({ params, searchParams }) {
         <Link href={`/product/${product.slug}`} className="btn-outline !py-2.5" target="_blank">Открыть на сайте</Link>
         <Link href={`/admin/stock/journal?product=${product.id}`} className="btn-outline !py-2.5">Движения по складу</Link>
       </PageHeader>
-      {searchParams?.created && <p className="mb-4 rounded-xl bg-brand-light px-4 py-3 text-sm text-brand-dark" role="status">Товар создан. Теперь добавьте фото, а остаток — через «Приход товара».</p>}
+      {searchParams?.created && <p className="mb-4 rounded-xl bg-tint px-4 py-3 text-sm text-heading" role="status">Товар создан. Теперь добавьте фото, а остаток — через «Приход товара».</p>}
       <div className="space-y-5">
         <ProductForm product={product} cost={inv?.avg_cost ?? ""} categories={(cats ?? []).map((c) => ({ id: c.id, label: c.name }))} />
         <section className="card p-5">
-          <h2 className="mb-3 font-display text-lg font-bold text-brand-dark">Фотографии</h2>
+          <h2 className="mb-3 font-display text-lg font-bold text-heading">Фотографии</h2>
           <ProductImages productId={product.id} images={images ?? []} />
         </section>
       </div>

@@ -41,21 +41,21 @@ function View({ rows, base }) {
   return (
     <div className="card overflow-x-auto">
       <table className="w-full min-w-[760px] text-left text-sm">
-        <thead className="border-b border-brand-dark/10 text-xs uppercase tracking-wide text-brand-ink/50">
+        <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
           <tr>
             <th className="px-4 py-3">Заказ</th><th className="px-4 py-3">Клиент</th><th className="px-4 py-3">Статус</th>
             <th className="px-4 py-3">Получение</th><th className="px-4 py-3 text-right">Сумма</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-brand-dark/5">
-          {rows.length === 0 && <tr><td colSpan={5} className="px-4 py-10 text-center text-brand-ink/50">Заказов не найдено</td></tr>}
+        <tbody className="divide-y divide-heading/5">
+          {rows.length === 0 && <tr><td colSpan={5} className="px-4 py-10 text-center text-body/50">Заказов не найдено</td></tr>}
           {rows.map((o) => (
-            <tr key={o.id} className="hover:bg-brand-light/40">
-              <td className="px-4 py-3"><Link href={`${base}/${o.id}`} className="font-semibold text-brand hover:underline">№ {o.order_number}</Link><p className="text-xs text-brand-ink/50">{formatDate(o.created_at)}</p></td>
-              <td className="px-4 py-3">{o.customer_name}<p className="text-xs text-brand-ink/50">{o.customer_phone}</p></td>
+            <tr key={o.id} className="hover:bg-tint/40">
+              <td className="px-4 py-3"><Link href={`${base}/${o.id}`} className="font-semibold text-brand hover:underline">№ {o.order_number}</Link><p className="text-xs text-body/50">{formatDate(o.created_at)}</p></td>
+              <td className="px-4 py-3">{o.customer_name}<p className="text-xs text-body/50">{o.customer_phone}</p></td>
               <td className="px-4 py-3"><StatusBadge status={o.status} /></td>
-              <td className="px-4 py-3">{o.delivery_type === "delivery" ? "Доставка" : "Самовывоз"}{o.courier_name && <p className="text-xs text-brand-ink/50">Курьер: {o.courier_name}</p>}</td>
-              <td className="px-4 py-3 text-right font-semibold">{formatMoney(o.total)}<p className="text-xs font-normal text-brand-ink/50">{o.payment_status === "paid" ? "оплачен" : o.payment_status === "refunded" ? "возврат" : "не оплачен"}</p></td>
+              <td className="px-4 py-3">{o.delivery_type === "delivery" ? "Доставка" : "Самовывоз"}{o.courier_name && <p className="text-xs text-body/50">Курьер: {o.courier_name}</p>}</td>
+              <td className="px-4 py-3 text-right font-semibold">{formatMoney(o.total)}<p className="text-xs font-normal text-body/50">{o.payment_status === "paid" ? "оплачен" : o.payment_status === "refunded" ? "возврат" : "не оплачен"}</p></td>
             </tr>
           ))}
         </tbody>

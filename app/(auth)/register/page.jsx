@@ -14,7 +14,7 @@ export default async function RegisterPage({ searchParams }) {
 
   return (
     <>
-      <h1 className="mb-6 text-center font-display text-3xl font-bold text-brand-dark">Регистрация</h1>
+      <h1 className="mb-6 text-center font-display text-3xl font-bold text-heading">Регистрация</h1>
       <RegisterForm next={next} />
     </>
   );

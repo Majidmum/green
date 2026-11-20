@@ -18,14 +18,14 @@ export default function PnlTable({ kpis }) {
   return (
     <div className="card overflow-x-auto">
       <table className="w-full min-w-[560px] text-left text-sm">
-        <tbody className="divide-y divide-brand-dark/5">
+        <tbody className="divide-y divide-heading/5">
           {rows.map((r) => (
-            <tr key={r.label} className={r.strong ? "bg-brand-light/50" : ""}>
-              <td className={`px-4 py-3 ${r.strong ? "font-bold" : ""}`}>{r.label}<p className="text-xs font-normal text-brand-ink/50">{r.note}</p></td>
+            <tr key={r.label} className={r.strong ? "bg-tint/50" : ""}>
+              <td className={`px-4 py-3 ${r.strong ? "font-bold" : ""}`}>{r.label}<p className="text-xs font-normal text-body/50">{r.note}</p></td>
               <td className={`whitespace-nowrap px-4 py-3 text-right ${r.strong ? "text-base font-bold" : ""} ${r.value < 0 ? "text-rose-600" : ""}`}>{formatMoney(r.value)}</td>
             </tr>
           ))}
-          {margin !== null && <tr><td className="px-4 py-3 text-brand-ink/70">Рентабельность (чистая прибыль / выручка)</td><td className="px-4 py-3 text-right font-semibold">{margin.toFixed(1)}%</td></tr>}
+          {margin !== null && <tr><td className="px-4 py-3 text-body/70">Рентабельность (чистая прибыль / выручка)</td><td className="px-4 py-3 text-right font-semibold">{margin.toFixed(1)}%</td></tr>}
         </tbody>
       </table>
     </div>

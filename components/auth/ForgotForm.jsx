@@ -35,10 +35,10 @@ export default function ForgotForm() {
   if (done) {
     return (
       <div className="space-y-4 text-center" role="status">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-light text-brand">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-tint text-brand">
           <MailCheck size={28} />
         </span>
-        <p className="text-sm text-brand-ink/70">
+        <p className="text-sm text-body/70">
           Если аккаунт с таким email существует, мы отправили на него ссылку для смены пароля.
         </p>
         <Link href="/login" className="btn-outline w-full">Вернуться ко входу</Link>

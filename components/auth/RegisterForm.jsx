@@ -53,11 +53,11 @@ export default function RegisterForm({ next = "/" }) {
   if (sentTo) {
     return (
       <div className="space-y-4 text-center" role="status">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-light text-brand">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-tint text-brand">
           <MailCheck size={28} />
         </span>
         <h2 className="text-lg font-semibold">Проверьте почту</h2>
-        <p className="text-sm text-brand-ink/70">
+        <p className="text-sm text-body/70">
           Мы отправили письмо на <strong>{sentTo}</strong>. Перейдите по ссылке из письма, чтобы подтвердить аккаунт.
         </p>
         <Link href="/login" className="btn-outline w-full">Перейти ко входу</Link>
@@ -86,11 +86,11 @@ export default function RegisterForm({ next = "/" }) {
       <button type="submit" disabled={isSubmitting} className="btn-primary w-full">
         {isSubmitting ? "Создаём аккаунт…" : "Зарегистрироваться"}
       </button>
-      <p className="text-xs text-brand-ink/60">
+      <p className="text-xs text-body/60">
         Регистрируясь, вы соглашаетесь с <Link href="/offer" className="underline">офертой</Link> и{" "}
         <Link href="/privacy-policy" className="underline">политикой конфиденциальности</Link>.
       </p>
-      <p className="text-center text-sm text-brand-ink/70">
+      <p className="text-center text-sm text-body/70">
         Уже есть аккаунт? <Link href="/login" className="font-semibold text-brand hover:underline">Войти</Link>
       </p>
     </form>

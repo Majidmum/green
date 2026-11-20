@@ -6,7 +6,7 @@ export default function OrdersFilters({ params, basePath }) {
   return (
     <form action={basePath} method="get" className="card mb-4 grid gap-3 p-4 sm:grid-cols-2 lg:grid-cols-6">
       <div className="relative lg:col-span-2">
-        <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-brand-ink/40" />
+        <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-body/40" />
         <input name="q" defaultValue={params.q} className="input !pl-9" placeholder="Номер, имя, телефон" aria-label="Поиск заказа" />
       </div>
       <select name="status" defaultValue={params.status} className="input" aria-label="Статус">

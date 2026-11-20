@@ -23,7 +23,7 @@ export default function AccountNav() {
             href={href}
             aria-current={active ? "page" : undefined}
             className={`flex shrink-0 items-center gap-2.5 rounded-full px-4 py-2.5 text-sm font-medium transition lg:rounded-xl ${
-              active ? "bg-brand text-white shadow-soft" : "bg-white text-brand-ink/80 shadow-soft hover:bg-brand-light"
+              active ? "bg-brand text-white shadow-soft" : "bg-surface text-body/80 shadow-soft hover:bg-tint"
             }`}
           >
             <Icon size={17} /> {label}

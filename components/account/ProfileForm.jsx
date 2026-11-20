@@ -26,7 +26,7 @@ export default function ProfileForm({ initial, email }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
       <FormField id="pf-email" label="Email">
-        <input id="pf-email" className="input bg-brand-cream/60" value={email ?? ""} disabled readOnly />
+        <input id="pf-email" className="input bg-page/60" value={email ?? ""} disabled readOnly />
       </FormField>
       <div className="grid gap-4 sm:grid-cols-2">
         <FormField id="pf-name" label="Имя" error={errors.full_name?.message}>
@@ -37,7 +37,7 @@ export default function ProfileForm({ initial, email }) {
         </FormField>
       </div>
       {msg && (
-        <p className={`rounded-xl px-4 py-3 text-sm ${msg.ok ? "bg-brand-light text-brand-dark" : "bg-rose-50 text-rose-700"}`} role={msg.ok ? "status" : "alert"}>
+        <p className={`rounded-xl px-4 py-3 text-sm ${msg.ok ? "bg-tint text-heading" : "bg-rose-50 text-rose-700"}`} role={msg.ok ? "status" : "alert"}>
           {msg.text}
         </p>
       )}

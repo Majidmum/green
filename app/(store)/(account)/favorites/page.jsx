@@ -26,11 +26,11 @@ export default async function FavoritesPage() {
 
   return (
     <div>
-      <h1 className="mb-6 font-display text-4xl font-bold text-brand-dark">Избранное</h1>
+      <h1 className="mb-6 font-display text-4xl font-bold text-heading">Избранное</h1>
       {products.length === 0 ? (
         <div className="card flex flex-col items-center gap-3 p-12 text-center">
           <Heart size={40} className="text-brand/50" />
-          <p className="text-brand-ink/70">В избранном пока пусто. Нажимайте на сердечко у товара, чтобы вернуться к нему позже.</p>
+          <p className="text-body/70">В избранном пока пусто. Нажимайте на сердечко у товара, чтобы вернуться к нему позже.</p>
           <Link href="/catalog" className="btn-primary">Перейти в каталог</Link>
         </div>
       ) : (

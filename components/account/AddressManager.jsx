@@ -29,7 +29,7 @@ function AddressForm({ initial, onDone }) {
     });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4 rounded-2xl border border-brand-dark/10 bg-brand-cream/50 p-4" noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4 rounded-2xl border border-heading/10 bg-page/50 p-4" noValidate>
       <div className="grid gap-4 sm:grid-cols-3">
         <FormField id="ad-label" label="Название" error={errors.label?.message}>
           <input id="ad-label" className="input" {...register("label")} />
@@ -75,23 +75,23 @@ export default function AddressManager({ addresses }) {
   return (
     <div>
       {addresses.length === 0 && editing !== "new" && (
-        <p className="text-sm text-brand-ink/60">Сохранённых адресов пока нет.</p>
+        <p className="text-sm text-body/60">Сохранённых адресов пока нет.</p>
       )}
       <ul className="grid gap-3 sm:grid-cols-2">
         {addresses.map((a) => (
-          <li key={a.id} className="rounded-2xl border border-brand-dark/10 bg-white p-4">
+          <li key={a.id} className="rounded-2xl border border-heading/10 bg-surface p-4">
             <div className="flex items-start justify-between gap-2">
               <span className="flex items-center gap-2 font-semibold"><MapPin size={16} className="text-brand" /> {a.label}</span>
-              {a.is_default && <span className="rounded-full bg-brand-light px-2 py-0.5 text-xs font-semibold text-brand-dark">Основной</span>}
+              {a.is_default && <span className="rounded-full bg-tint px-2 py-0.5 text-xs font-semibold text-heading">Основной</span>}
             </div>
-            <p className="mt-2 text-sm text-brand-ink/70">{formatAddress(a)}</p>
+            <p className="mt-2 text-sm text-body/70">{formatAddress(a)}</p>
             <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
               {!a.is_default && (
-                <button className="inline-flex items-center gap-1 rounded-full bg-brand-light px-3 py-1.5 font-medium text-brand-dark" disabled={pending} onClick={() => run(() => setDefaultAddress(a.id))}>
+                <button className="inline-flex items-center gap-1 rounded-full bg-tint px-3 py-1.5 font-medium text-heading" disabled={pending} onClick={() => run(() => setDefaultAddress(a.id))}>
                   <Star size={13} /> Сделать основным
                 </button>
               )}
-              <button className="inline-flex items-center gap-1 rounded-full bg-brand-light px-3 py-1.5 font-medium text-brand-dark" onClick={() => setEditing(a)}>
+              <button className="inline-flex items-center gap-1 rounded-full bg-tint px-3 py-1.5 font-medium text-heading" onClick={() => setEditing(a)}>
                 <Pencil size={13} /> Изменить
               </button>
               <button

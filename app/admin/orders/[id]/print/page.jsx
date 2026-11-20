@@ -18,7 +18,7 @@ export default async function PrintOrder({ params }) {
   const store = info?.value ?? {};
 
   return (
-    <div className="mx-auto max-w-3xl bg-white p-8 text-sm text-black print:p-0">
+    <div className="mx-auto max-w-3xl bg-surface p-8 text-sm text-black print:p-0">
       <div className="mb-6 flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold">Накладная № {o.order_number}</h1>

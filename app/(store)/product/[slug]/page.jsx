@@ -74,7 +74,7 @@ export default async function ProductPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-      <nav className="mb-6 text-sm text-brand-ink/60" aria-label="Хлебные крошки">
+      <nav className="mb-6 text-sm text-body/60" aria-label="Хлебные крошки">
         <Link href="/" className="hover:text-brand">Главная</Link> /{" "}
         <Link href="/catalog" className="hover:text-brand">Каталог</Link> /{" "}
         <Link href={`/catalog?category=${product.category_slug}`} className="hover:text-brand">{product.category_name}</Link>
@@ -89,23 +89,23 @@ export default async function ProductPage({ params }) {
             {product.is_new && <span className="rounded-full bg-brand px-3 py-1 text-xs font-semibold text-white">Новинка</span>}
             {product.is_seasonal && <span className="rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">Сезонный</span>}
           </div>
-          <h1 className="mt-3 font-display text-4xl font-bold text-brand-dark">{product.name}</h1>
+          <h1 className="mt-3 font-display text-4xl font-bold text-heading">{product.name}</h1>
           <div className="mt-3"><Stars value={product.rating_avg} count={product.rating_count} size={18} /></div>
 
           <div className="mt-6 flex items-baseline gap-3">
-            <span className="text-4xl font-bold text-brand-dark">{formatMoney(product.price)}</span>
-            <span className="text-brand-ink/60">за {unitLabel(product.unit)}</span>
+            <span className="text-4xl font-bold text-heading">{formatMoney(product.price)}</span>
+            <span className="text-body/60">за {unitLabel(product.unit)}</span>
             {product.old_price && Number(product.old_price) > Number(product.price) && (
-              <span className="text-lg text-brand-ink/50 line-through">{formatMoney(product.old_price)}</span>
+              <span className="text-lg text-body/50 line-through">{formatMoney(product.old_price)}</span>
             )}
           </div>
 
-          {product.description && <p className="mt-5 leading-relaxed text-brand-ink/80">{product.description}</p>}
+          {product.description && <p className="mt-5 leading-relaxed text-body/80">{product.description}</p>}
 
-          <dl className="mt-6 divide-y divide-brand-dark/10 rounded-xl2 bg-white px-5 shadow-soft">
+          <dl className="mt-6 divide-y divide-heading/10 rounded-xl2 bg-surface px-5 shadow-soft">
             {facts.map(([k, v]) => (
               <div key={k} className="flex justify-between gap-4 py-3 text-sm">
-                <dt className="text-brand-ink/60">{k}</dt>
+                <dt className="text-body/60">{k}</dt>
                 <dd className="text-right font-medium">{v}</dd>
               </div>
             ))}
@@ -116,19 +116,19 @@ export default async function ProductPage({ params }) {
       </div>
 
       <section className="mt-16" aria-labelledby="reviews-title">
-        <h2 id="reviews-title" className="font-display text-3xl font-bold text-brand-dark">Отзывы</h2>
+        <h2 id="reviews-title" className="font-display text-3xl font-bold text-heading">Отзывы</h2>
         {reviews.length > 0 ? (
           <div className="mt-6 grid gap-5 md:grid-cols-2">
             {reviews.map((r) => <ReviewCard key={r.id} review={r} showProduct={false} />)}
           </div>
         ) : (
-          <p className="mt-4 text-brand-ink/60">Отзывов пока нет. Оставить отзыв могут покупатели, получившие этот товар.</p>
+          <p className="mt-4 text-body/60">Отзывов пока нет. Оставить отзыв могут покупатели, получившие этот товар.</p>
         )}
       </section>
 
       {related.length > 0 && (
         <section className="mt-16" aria-labelledby="related-title">
-          <h2 id="related-title" className="font-display text-3xl font-bold text-brand-dark">Похожие товары</h2>
+          <h2 id="related-title" className="font-display text-3xl font-bold text-heading">Похожие товары</h2>
           <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
             {related.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>

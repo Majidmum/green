@@ -36,7 +36,7 @@ function getIdempotencyKey() {
 
 const card = "card p-6";
 const radioCard =
-  "flex cursor-pointer items-start gap-3 rounded-xl border border-brand-dark/15 bg-white p-4 transition has-[:checked]:border-brand has-[:checked]:bg-brand-light/50";
+  "flex cursor-pointer items-start gap-3 rounded-xl border border-heading/15 bg-surface p-4 transition has-[:checked]:border-brand has-[:checked]:bg-tint/50";
 
 function addressLine(a) {
   return [a.street, a.house && `д. ${a.house}`, a.apartment && `кв. ${a.apartment}`].filter(Boolean).join(", ");
@@ -121,12 +121,12 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
     router.replace(`/checkout/success?order=${res.orderId}`);
   }
 
-  if (!hydrated) return <div className="h-64 animate-pulse rounded-xl2 bg-white/60" aria-busy="true" />;
+  if (!hydrated) return <div className="h-64 animate-pulse rounded-xl2 bg-surface/60" aria-busy="true" />;
 
   if (items.length === 0) {
     return (
       <div className="card flex flex-col items-center gap-4 px-6 py-20 text-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-light text-brand"><ShoppingBasket size={30} /></span>
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-tint text-brand"><ShoppingBasket size={30} /></span>
         <h2 className="text-xl font-semibold">В корзине пусто</h2>
         <Link href="/catalog" className="btn-primary">Перейти в каталог</Link>
       </div>
@@ -150,11 +150,11 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
           <div className="grid gap-3 sm:grid-cols-2">
             <label className={radioCard}>
               <input type="radio" value="delivery" className="mt-1 accent-brand" {...register("delivery_type")} />
-              <span><span className="block font-semibold">Доставка</span><span className="text-sm text-brand-ink/60">Курьер привезёт заказ по адресу</span></span>
+              <span><span className="block font-semibold">Доставка</span><span className="text-sm text-body/60">Курьер привезёт заказ по адресу</span></span>
             </label>
             <label className={radioCard}>
               <input type="radio" value="pickup" className="mt-1 accent-brand" {...register("delivery_type")} />
-              <span><span className="block font-semibold">Самовывоз</span><span className="text-sm text-brand-ink/60">Заберёте заказ сами</span></span>
+              <span><span className="block font-semibold">Самовывоз</span><span className="text-sm text-body/60">Заберёте заказ сами</span></span>
             </label>
           </div>
         </section>
@@ -174,7 +174,7 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
               </select>
             </FormField>
             {zone && (
-              <p className="text-sm text-brand-ink/60">
+              <p className="text-sm text-body/60">
                 {zone.free_delivery_from ? `Бесплатно от ${formatMoney(zone.free_delivery_from)}. ` : ""}
                 {Number(zone.min_order_total) > 0 ? `Минимальный заказ: ${formatMoney(zone.min_order_total)}.` : ""}
               </p>
@@ -200,7 +200,7 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
                     <input type="radio" value={a.id} className="mt-1 accent-brand" {...register("address_id")} />
                     <span>
                       <span className="block font-medium">{a.label}</span>
-                      <span className="text-sm text-brand-ink/70">{addressLine(a)}</span>
+                      <span className="text-sm text-body/70">{addressLine(a)}</span>
                     </span>
                   </label>
                 ))}
@@ -264,14 +264,14 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
         <section className={card} aria-labelledby="h-pay">
           <h2 id="h-pay" className="mb-4 text-lg font-semibold">Оплата</h2>
           <div className="space-y-2">
-            <div className="flex items-start gap-3 rounded-xl border border-brand bg-brand-light/50 p-4">
+            <div className="flex items-start gap-3 rounded-xl border border-brand bg-tint/50 p-4">
               <Banknote className="mt-0.5 text-brand" size={20} />
               <span>
                 <span className="block font-semibold">{delivery ? "Наличными при доставке" : "Оплата при самовывозе"}</span>
-                <span className="text-sm text-brand-ink/60">Платите при получении заказа</span>
+                <span className="text-sm text-body/60">Платите при получении заказа</span>
               </span>
             </div>
-            <div className="flex items-start gap-3 rounded-xl border border-brand-dark/10 p-4 opacity-50" aria-disabled="true">
+            <div className="flex items-start gap-3 rounded-xl border border-heading/10 p-4 opacity-50" aria-disabled="true">
               <CreditCard className="mt-0.5" size={20} />
               <span>
                 <span className="block font-semibold">Онлайн-оплата</span>
@@ -283,26 +283,26 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
       </div>
 
       <aside className="card h-fit space-y-5 p-6 lg:sticky lg:top-24">
-        <h2 className="font-display text-2xl font-bold text-brand-dark">Ваш заказ</h2>
+        <h2 className="font-display text-2xl font-bold text-heading">Ваш заказ</h2>
         <ul className="space-y-2 text-sm">
           {items.map((i) => (
             <li key={i.productId} className={`flex justify-between gap-3 ${i.outOfStock ? "text-rose-600" : ""}`}>
-              <span className="min-w-0">{i.name} <span className="text-brand-ink/50">× {formatQty(i.quantity, i.unit)}</span></span>
+              <span className="min-w-0">{i.name} <span className="text-body/50">× {formatQty(i.quantity, i.unit)}</span></span>
               <span className="shrink-0 font-medium">{i.outOfStock ? "нет в наличии" : formatMoney(Math.round(i.price * i.quantity * 100) / 100)}</span>
             </li>
           ))}
         </ul>
         <PromoBox promo={promo} isLoggedIn nextPath="/checkout" />
-        <dl className="space-y-2 border-t border-brand-dark/10 pt-4 text-sm">
-          <div className="flex justify-between"><dt className="text-brand-ink/70">Товары</dt><dd>{formatMoney(totals.subtotal)}</dd></div>
+        <dl className="space-y-2 border-t border-heading/10 pt-4 text-sm">
+          <div className="flex justify-between"><dt className="text-body/70">Товары</dt><dd>{formatMoney(totals.subtotal)}</dd></div>
           {totals.discount > 0 && <div className="flex justify-between text-brand"><dt>Промокод</dt><dd>−{formatMoney(totals.discount)}</dd></div>}
           {delivery && (
             <div className="flex justify-between">
-              <dt className="text-brand-ink/70">Доставка</dt>
+              <dt className="text-body/70">Доставка</dt>
               <dd>{zone ? (totals.fee > 0 ? formatMoney(totals.fee) : "бесплатно") : "выберите район"}</dd>
             </div>
           )}
-          <div className="flex justify-between border-t border-brand-dark/10 pt-3 text-lg font-bold"><dt>Итого</dt><dd>{formatMoney(totals.total)}</dd></div>
+          <div className="flex justify-between border-t border-heading/10 pt-3 text-lg font-bold"><dt>Итого</dt><dd>{formatMoney(totals.total)}</dd></div>
         </dl>
 
         {delivery && totals.belowMin && (
@@ -314,7 +314,7 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
         <button type="submit" disabled={blocked} className="btn-primary w-full !py-4 text-base">
           {isSubmitting ? "Оформляем…" : "Подтвердить заказ"}
         </button>
-        <p className="text-xs text-brand-ink/60">
+        <p className="text-xs text-body/60">
           Нажимая «Подтвердить заказ», вы соглашаетесь с <Link href="/offer" className="underline">офертой</Link>.
         </p>
         <Link href="/cart" className="block text-center text-sm text-brand hover:underline">← Вернуться в корзину</Link>

@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }) {
 
   return (
     <>
-      <h1 className="mb-6 text-center font-display text-3xl font-bold text-brand-dark">Вход</h1>
+      <h1 className="mb-6 text-center font-display text-3xl font-bold text-heading">Вход</h1>
       <LoginForm next={next} notice={notice} />
     </>
   );

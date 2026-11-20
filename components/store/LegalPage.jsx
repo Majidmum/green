@@ -11,8 +11,8 @@ export default function LegalPage({ page, children }) {
   if (!page) notFound();
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="font-display text-4xl font-bold text-brand-dark">{page.title}</h1>
-      <div className="mt-8 whitespace-pre-line leading-relaxed text-brand-ink/85">{page.body}</div>
+      <h1 className="font-display text-4xl font-bold text-heading">{page.title}</h1>
+      <div className="mt-8 whitespace-pre-line leading-relaxed text-body/85">{page.body}</div>
       {children}
     </div>
   );

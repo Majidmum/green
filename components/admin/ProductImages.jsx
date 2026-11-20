@@ -39,16 +39,16 @@ export default function ProductImages({ productId, images }) {
     <div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {images.map((im) => (
-          <figure key={im.id} className="group relative overflow-hidden rounded-xl border border-brand-dark/10">
+          <figure key={im.id} className="group relative overflow-hidden rounded-xl border border-heading/10">
             <div className="relative aspect-square"><Image src={im.url} alt={im.alt ?? "Фото товара"} fill sizes="160px" className="object-cover" unoptimized /></div>
             {im.is_primary && <span className="absolute left-2 top-2 rounded-full bg-brand px-2 py-0.5 text-[11px] font-semibold text-white">Главное</span>}
-            <figcaption className="flex justify-between gap-1 bg-white p-1.5">
-              {!im.is_primary ? <button className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-brand hover:bg-brand-light" disabled={pending} onClick={() => act(() => setPrimaryImage({ productId, imageId: im.id }))}><Star size={13} /> Главное</button> : <span />}
+            <figcaption className="flex justify-between gap-1 bg-surface p-1.5">
+              {!im.is_primary ? <button className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-brand hover:bg-tint" disabled={pending} onClick={() => act(() => setPrimaryImage({ productId, imageId: im.id }))}><Star size={13} /> Главное</button> : <span />}
               <button className="rounded-full p-1.5 text-rose-600 hover:bg-rose-50" aria-label="Удалить фото" disabled={pending} onClick={() => confirm("Удалить фото?") && act(() => deleteProductImage({ productId, imageId: im.id }))}><Trash2 size={14} /></button>
             </figcaption>
           </figure>
         ))}
-        <label className="flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-brand-dark/20 text-sm text-brand-ink/60 hover:border-brand hover:text-brand">
+        <label className="flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-xl border-2 border-dashed border-heading/20 text-sm text-body/60 hover:border-brand hover:text-brand">
           <ImagePlus size={24} /> {busy ? "Загрузка…" : "Добавить фото"}
           <input type="file" multiple accept="image/jpeg,image/png,image/webp" className="sr-only" disabled={busy} onChange={(e) => e.target.files?.length && upload([...e.target.files])} />
         </label>

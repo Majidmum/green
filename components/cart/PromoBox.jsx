@@ -12,7 +12,7 @@ export default function PromoBox({ promo, isLoggedIn, nextPath = "/cart" }) {
 
   if (!isLoggedIn) {
     return (
-      <p className="rounded-xl bg-brand-light px-4 py-3 text-sm text-brand-dark">
+      <p className="rounded-xl bg-tint px-4 py-3 text-sm text-heading">
         <Link href={`/login?next=${encodeURIComponent(nextPath)}`} className="font-semibold underline">Войдите</Link>
         , чтобы применить промокод.
       </p>
@@ -22,14 +22,14 @@ export default function PromoBox({ promo, isLoggedIn, nextPath = "/cart" }) {
   if (promo.code) {
     return (
       <div>
-        <div className="flex items-center justify-between gap-3 rounded-xl border border-brand-dark/15 bg-white px-4 py-3">
+        <div className="flex items-center justify-between gap-3 rounded-xl border border-heading/15 bg-surface px-4 py-3">
           <span className="flex items-center gap-2 text-sm font-semibold">
             <Tag size={16} className="text-brand" /> {promo.code}
           </span>
           <button
             type="button"
             onClick={() => setPromo("")}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-brand-ink/60 hover:bg-brand-light"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-body/60 hover:bg-tint"
             aria-label="Убрать промокод"
           >
             <X size={16} />
@@ -41,7 +41,7 @@ export default function PromoBox({ promo, isLoggedIn, nextPath = "/cart" }) {
           </p>
         )}
         {promo.status === "error" && <p className="mt-2 text-sm text-rose-600" role="alert">{promo.error}</p>}
-        {promo.status === "loading" && <p className="mt-2 text-sm text-brand-ink/60">Проверяем промокод…</p>}
+        {promo.status === "loading" && <p className="mt-2 text-sm text-body/60">Проверяем промокод…</p>}
       </div>
     );
   }

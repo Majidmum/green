@@ -16,7 +16,7 @@ function Cell({ col, row, lookups }) {
   const v = row[col.key];
   switch ((col.format ?? "").split(":")[0]) {
     case "bool":
-      return v ? <Check size={16} className="text-brand" aria-label="Да" /> : <X size={16} className="text-brand-ink/30" aria-label="Нет" />;
+      return v ? <Check size={16} className="text-brand" aria-label="Да" /> : <X size={16} className="text-body/30" aria-label="Нет" />;
     case "money":
       return v === null || v === undefined ? "—" : formatMoney(v);
     case "datetime":
@@ -108,7 +108,7 @@ export default function ResourceManager({ resourceKey, rows, lookups = {} }) {
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <div className="relative max-w-xs flex-1">
-          <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-brand-ink/40" />
+          <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-body/40" />
           <input className="input !pl-9" placeholder="Поиск…" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Поиск" />
         </div>
         <button className="btn-primary ml-auto !py-2.5" onClick={() => setEditing("new")}><Plus size={16} /> Добавить</button>
@@ -117,20 +117,20 @@ export default function ResourceManager({ resourceKey, rows, lookups = {} }) {
 
       <div className="card overflow-x-auto">
         <table className="w-full min-w-[640px] text-left text-sm">
-          <thead className="border-b border-brand-dark/10 text-xs uppercase tracking-wide text-brand-ink/50">
+          <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
             <tr>{res.columns.map((c) => <th key={c.key} className="px-4 py-3 font-semibold">{c.label}</th>)}<th className="px-4 py-3" /></tr>
           </thead>
-          <tbody className="divide-y divide-brand-dark/5">
-            {shown.length === 0 && <tr><td colSpan={res.columns.length + 1} className="px-4 py-10 text-center text-brand-ink/50">Записей нет</td></tr>}
+          <tbody className="divide-y divide-heading/5">
+            {shown.length === 0 && <tr><td colSpan={res.columns.length + 1} className="px-4 py-10 text-center text-body/50">Записей нет</td></tr>}
             {shown.map((row) => (
               <tr key={row.id} className={row.is_voided ? "opacity-50" : ""}>
                 {res.columns.map((c) => (
-                  <td key={c.key} className={`px-4 py-3 ${c.strong ? "font-semibold" : ""} ${c.muted ? "text-brand-ink/60" : ""}`}><Cell col={c} row={row} lookups={lookups} /></td>
+                  <td key={c.key} className={`px-4 py-3 ${c.strong ? "font-semibold" : ""} ${c.muted ? "text-body/60" : ""}`}><Cell col={c} row={row} lookups={lookups} /></td>
                 ))}
                 <td className="whitespace-nowrap px-4 py-3 text-right">
                   {!row.is_voided && (
                     <>
-                      <button className="rounded-full p-2 text-brand hover:bg-brand-light" aria-label="Изменить" onClick={() => setEditing(row)}><Pencil size={15} /></button>
+                      <button className="rounded-full p-2 text-brand hover:bg-tint" aria-label="Изменить" onClick={() => setEditing(row)}><Pencil size={15} /></button>
                       <button className="rounded-full p-2 text-rose-600 hover:bg-rose-50" aria-label={res.voidInsteadOfDelete ? "Аннулировать" : "Удалить"} disabled={pending} onClick={() => remove(row)}>
                         {res.voidInsteadOfDelete ? <Ban size={15} /> : <Trash2 size={15} />}
                       </button>

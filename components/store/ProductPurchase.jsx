@@ -32,8 +32,8 @@ export default function ProductPurchase({ product }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <QuantityStepper value={qty} onChange={setQty} step={step} max={stock} unit={product.unit} />
         <div className="text-right">
-          <div className="text-xs text-brand-ink/60">Итого</div>
-          <div className="text-xl font-bold text-brand-dark">{formatMoney(total)}</div>
+          <div className="text-xs text-body/60">Итого</div>
+          <div className="text-xl font-bold text-heading">{formatMoney(total)}</div>
         </div>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row">

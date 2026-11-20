@@ -32,7 +32,7 @@ export default function FavoriteButton({ productId, className = "", withLabel = 
         aria-label={active ? "Убрать из избранного" : "В избранное"}
         className={`inline-flex items-center justify-center gap-2 transition disabled:opacity-60 ${className}`}
       >
-        <Heart size={18} className={active ? "fill-rose-500 text-rose-500" : "text-brand-dark"} />
+        <Heart size={18} className={active ? "fill-rose-500 text-rose-500" : "text-heading"} />
         {withLabel && <span className="text-sm font-medium">{active ? "В избранном" : "В избранное"}</span>}
       </button>
       {error && <span className="sr-only" role="alert">{error}</span>}

@@ -29,10 +29,10 @@ export default async function AdminReviewsPage({ searchParams }) {
       <PageHeader title="Отзывы" description="Новые и изменённые отзывы попадают сюда на проверку и появляются на сайте только после одобрения." />
       <div className="mb-5 flex flex-wrap gap-2">
         {TABS.map(([k, l], i) => (
-          <Link key={k} href={`/admin/reviews?status=${k}`} aria-current={status === k ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-medium ${status === k ? "bg-brand text-white" : "bg-white shadow-soft hover:bg-brand-light"}`}>{l} · {counts[i].count ?? 0}</Link>
+          <Link key={k} href={`/admin/reviews?status=${k}`} aria-current={status === k ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-medium ${status === k ? "bg-brand text-white" : "bg-surface shadow-soft hover:bg-tint"}`}>{l} · {counts[i].count ?? 0}</Link>
         ))}
       </div>
-      {!reviews?.length ? <div className="card p-10 text-center text-brand-ink/50">Здесь пока ничего нет</div> : (
+      {!reviews?.length ? <div className="card p-10 text-center text-body/50">Здесь пока ничего нет</div> : (
         <div className="grid gap-4 lg:grid-cols-2">
           {reviews.map((r) => <ReviewModeration key={r.id} review={{ ...r, product_name: r.products?.name ?? "Товар", author: who.get(r.user_id) || "Покупатель" }} />)}
         </div>

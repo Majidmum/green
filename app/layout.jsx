@@ -15,6 +15,9 @@ const display = Playfair_Display({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
+// Ставит тему до первой отрисовки: сохранённый выбор или тема системы
+const THEME_SCRIPT = `try{var t=localStorage.getItem("gg-theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t}catch(e){}`;
+
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -32,12 +35,18 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#123D2A",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF8F2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0C140F" },
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ru" className={`${inter.variable} ${display.variable}`}>
+    <html lang="ru" className={`${inter.variable} ${display.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

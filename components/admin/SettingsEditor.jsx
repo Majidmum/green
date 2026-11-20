@@ -7,7 +7,7 @@ import { saveSetting } from "@/app/admin/settings/actions";
 function Section({ title, hint, children }) {
   return (
     <section className="card space-y-4 p-5">
-      <div><h2 className="font-display text-lg font-bold text-brand-dark">{title}</h2>{hint && <p className="mt-0.5 text-xs text-brand-ink/60">{hint}</p>}</div>
+      <div><h2 className="font-display text-lg font-bold text-heading">{title}</h2>{hint && <p className="mt-0.5 text-xs text-body/60">{hint}</p>}</div>
       {children}
     </section>
   );
@@ -17,7 +17,7 @@ function SaveBar({ onSave, pending, msg }) {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <button type="button" className="btn-primary !py-2.5" disabled={pending} onClick={onSave}>{pending ? "Сохраняем…" : "Сохранить"}</button>
-      {msg && <span className={`text-sm ${msg.ok ? "text-brand-dark" : "text-rose-600"}`} role={msg.ok ? "status" : "alert"}>{msg.text}</span>}
+      {msg && <span className={`text-sm ${msg.ok ? "text-heading" : "text-rose-600"}`} role={msg.ok ? "status" : "alert"}>{msg.text}</span>}
     </div>
   );
 }

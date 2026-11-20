@@ -48,22 +48,22 @@ export default async function StockJournal({ searchParams, basePath }) {
       </form>
       <div className="card overflow-x-auto">
         <table className="w-full min-w-[860px] text-left text-sm">
-          <thead className="border-b border-brand-dark/10 text-xs uppercase tracking-wide text-brand-ink/50">
+          <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
             <tr><th className="px-4 py-3">Дата</th><th className="px-4 py-3">Товар</th><th className="px-4 py-3">Операция</th><th className="px-4 py-3 text-right">Изменение</th><th className="px-4 py-3 text-right">Остаток</th><th className="px-4 py-3 text-right">Себест.</th><th className="px-4 py-3">Детали</th></tr>
           </thead>
-          <tbody className="divide-y divide-brand-dark/5">
-            {!rows?.length && <tr><td colSpan={7} className="px-4 py-10 text-center text-brand-ink/50">Движений не найдено</td></tr>}
+          <tbody className="divide-y divide-heading/5">
+            {!rows?.length && <tr><td colSpan={7} className="px-4 py-10 text-center text-body/50">Движений не найдено</td></tr>}
             {(rows ?? []).map((r) => {
               const ch = Number(r.quantity_change);
               return (
                 <tr key={r.id}>
-                  <td className="whitespace-nowrap px-4 py-2.5 text-brand-ink/70">{formatDate(r.occurred_at)}</td>
+                  <td className="whitespace-nowrap px-4 py-2.5 text-body/70">{formatDate(r.occurred_at)}</td>
                   <td className="px-4 py-2.5 font-medium">{r.products?.name}</td>
-                  <td className="px-4 py-2.5">{INVENTORY_TX_TYPES[r.type]}{r.reason && <span className="text-brand-ink/50"> · {TX_REASONS[r.reason] ?? r.reason}</span>}</td>
+                  <td className="px-4 py-2.5">{INVENTORY_TX_TYPES[r.type]}{r.reason && <span className="text-body/50"> · {TX_REASONS[r.reason] ?? r.reason}</span>}</td>
                   <td className={`whitespace-nowrap px-4 py-2.5 text-right font-semibold ${ch < 0 ? "text-rose-600" : "text-emerald-600"}`}>{ch > 0 ? "+" : ""}{formatQty(ch, r.products?.unit)}</td>
-                  <td className="whitespace-nowrap px-4 py-2.5 text-right text-brand-ink/70">{Number(r.quantity_before)} → {Number(r.quantity_after)}</td>
+                  <td className="whitespace-nowrap px-4 py-2.5 text-right text-body/70">{Number(r.quantity_before)} → {Number(r.quantity_after)}</td>
                   <td className="px-4 py-2.5 text-right">{formatMoney(r.unit_cost)}</td>
-                  <td className="px-4 py-2.5 text-xs text-brand-ink/60">
+                  <td className="px-4 py-2.5 text-xs text-body/60">
                     {[r.document_number && `док. ${r.document_number}`, r.suppliers?.name, r.comment, r.created_by && who.get(r.created_by)].filter(Boolean).join(" · ")}
                   </td>
                 </tr>

@@ -30,7 +30,7 @@ export default async function ManagerStockPage({ searchParams }) {
         <KpiCard title="Стоимость склада" value={formatMoney(k.stock_value)} hint="по средней себестоимости, на сегодня" />
       </div>
       <div className="mb-4 flex gap-2">
-        {[["stock", "Остатки"], ["journal", "Журнал движений"]].map(([v, l]) => <Link key={v} href={tabHref(v)} aria-current={view === v ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-medium ${view === v ? "bg-brand text-white" : "bg-white shadow-soft hover:bg-brand-light"}`}>{l}</Link>)}
+        {[["stock", "Остатки"], ["journal", "Журнал движений"]].map(([v, l]) => <Link key={v} href={tabHref(v)} aria-current={view === v ? "page" : undefined} className={`rounded-full px-4 py-2 text-sm font-medium ${view === v ? "bg-brand text-white" : "bg-surface shadow-soft hover:bg-tint"}`}>{l}</Link>)}
       </div>
       {view === "journal" ? <StockJournal searchParams={searchParams} basePath="/manager/stock" /> : <StockTable searchParams={searchParams} basePath="/manager/stock" />}
     </>

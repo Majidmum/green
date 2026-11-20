@@ -9,12 +9,12 @@ export default function Stars({ value = 0, count, size = 14 }) {
           <Star
             key={i}
             size={size}
-            className={i <= Math.round(v) ? "fill-amber-400 text-amber-400" : "text-brand-dark/20"}
+            className={i <= Math.round(v) ? "fill-amber-400 text-amber-400" : "text-heading/20"}
           />
         ))}
       </span>
       {count !== undefined && (
-        <span className={`text-xs text-brand-ink/60 ${count > 0 ? "" : "hidden sm:inline"}`}>
+        <span className={`text-xs text-body/60 ${count > 0 ? "" : "hidden sm:inline"}`}>
           {count > 0 ? `${v.toFixed(1)} (${count})` : "Нет отзывов"}
         </span>
       )}

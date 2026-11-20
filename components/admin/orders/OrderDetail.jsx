@@ -11,13 +11,13 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function Card({ title, children }) {
   return (
     <section className="card p-5">
-      <h2 className="mb-3 font-display text-lg font-bold text-brand-dark">{title}</h2>
+      <h2 className="mb-3 font-display text-lg font-bold text-heading">{title}</h2>
       {children}
     </section>
   );
 }
 const Row = ({ k, children }) => (
-  <div className="flex justify-between gap-4 py-1"><dt className="text-brand-ink/60">{k}</dt><dd className="text-right font-medium">{children}</dd></div>
+  <div className="flex justify-between gap-4 py-1"><dt className="text-body/60">{k}</dt><dd className="text-right font-medium">{children}</dd></div>
 );
 
 // Страница заказа для персонала. canEdit=false — режим просмотра (руководитель).
@@ -46,8 +46,8 @@ export default async function OrderDetail({ supabase, id, base, canEdit }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <Link href={base} className="inline-flex items-center gap-1 text-sm text-brand hover:underline"><ChevronLeft size={16} /> Все заказы</Link>
-          <h1 className="mt-1 flex flex-wrap items-center gap-3 font-display text-3xl font-bold text-brand-dark">Заказ № {o.order_number} <StatusBadge status={o.status} /></h1>
-          <p className="text-sm text-brand-ink/60">Создан {formatDate(o.created_at)}{o.delivered_at && ` · доставлен ${formatDate(o.delivered_at)}`}</p>
+          <h1 className="mt-1 flex flex-wrap items-center gap-3 font-display text-3xl font-bold text-heading">Заказ № {o.order_number} <StatusBadge status={o.status} /></h1>
+          <p className="text-sm text-body/60">Создан {formatDate(o.created_at)}{o.delivered_at && ` · доставлен ${formatDate(o.delivered_at)}`}</p>
         </div>
         <Link href={`${base}/${o.id}/print`} className="btn-outline !py-2.5"><Printer size={16} /> Накладная</Link>
       </div>
@@ -57,23 +57,23 @@ export default async function OrderDetail({ supabase, id, base, canEdit }) {
           <Card title="Состав заказа">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-sm">
-                <thead className="text-xs uppercase tracking-wide text-brand-ink/50">
+                <thead className="text-xs uppercase tracking-wide text-body/50">
                   <tr><th className="py-2">Товар</th><th className="py-2">Кол-во</th><th className="py-2 text-right">Цена</th><th className="py-2 text-right">Себест.</th><th className="py-2 text-right">Сумма</th></tr>
                 </thead>
-                <tbody className="divide-y divide-brand-dark/5">
+                <tbody className="divide-y divide-heading/5">
                   {o.order_items.map((i) => (
                     <tr key={i.id}>
                       <td className="py-2">{i.product_name}{returnedBy.get(i.id) > 0 && <span className="ml-2 rounded-full bg-rose-100 px-2 py-0.5 text-xs text-rose-700">возврат {formatQty(returnedBy.get(i.id), i.unit)}</span>}</td>
                       <td className="py-2">{formatQty(i.quantity, i.unit)}</td>
                       <td className="py-2 text-right">{formatMoney(i.unit_price)}</td>
-                      <td className="py-2 text-right text-brand-ink/60">{formatMoney(i.unit_cost)}</td>
+                      <td className="py-2 text-right text-body/60">{formatMoney(i.unit_cost)}</td>
                       <td className="py-2 text-right font-semibold">{formatMoney(i.line_total)}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <dl className="mt-3 space-y-0.5 border-t border-brand-dark/10 pt-3 text-sm">
+            <dl className="mt-3 space-y-0.5 border-t border-heading/10 pt-3 text-sm">
               <Row k="Товары">{formatMoney(o.subtotal)}</Row>
               {Number(o.promo_discount) > 0 && <Row k="Промокод">−{formatMoney(o.promo_discount)}</Row>}
               {o.delivery_type === "delivery" && <Row k="Доставка">{formatMoney(o.delivery_fee)}</Row>}
@@ -95,7 +95,7 @@ export default async function OrderDetail({ supabase, id, base, canEdit }) {
 
           {o.order_returns.length > 0 && (
             <Card title="История возвратов">
-              <ul className="divide-y divide-brand-dark/5 text-sm">
+              <ul className="divide-y divide-heading/5 text-sm">
                 {o.order_returns.map((r) => (
                   <li key={r.id} className="flex justify-between gap-4 py-2">
                     <span>{formatDate(r.created_at)} · {r.restocked ? "возвращён на склад" : "списан как негодный"}{r.reason && ` · ${r.reason}`}</span>
@@ -131,8 +131,8 @@ export default async function OrderDetail({ supabase, id, base, canEdit }) {
               {history.map((h, i) => (
                 <li key={i} className="border-l-2 border-brand/30 pl-3">
                   <p className="font-semibold"><StatusBadge status={h.status} /></p>
-                  <p className="text-xs text-brand-ink/60">{formatDate(h.created_at)}{h.changed_by && actorName.get(h.changed_by) ? ` · ${actorName.get(h.changed_by)}` : ""}</p>
-                  {h.note && <p className="text-xs text-brand-ink/70">{h.note}</p>}
+                  <p className="text-xs text-body/60">{formatDate(h.created_at)}{h.changed_by && actorName.get(h.changed_by) ? ` · ${actorName.get(h.changed_by)}` : ""}</p>
+                  {h.note && <p className="text-xs text-body/70">{h.note}</p>}
                 </li>
               ))}
             </ol>

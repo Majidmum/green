@@ -47,7 +47,7 @@ export default function LoginForm({ next = "/", notice = "" }) {
       <button type="submit" disabled={isSubmitting} className="btn-primary w-full">
         {isSubmitting ? "Входим…" : "Войти"}
       </button>
-      <p className="text-center text-sm text-brand-ink/70">
+      <p className="text-center text-sm text-body/70">
         Нет аккаунта?{" "}
         <Link href={`/register${next && next !== "/" ? `?next=${encodeURIComponent(next)}` : ""}`} className="font-semibold text-brand hover:underline">
           Зарегистрироваться

@@ -33,7 +33,7 @@ export default function ImageUpload({ value, onChange, bucket, folder, id }) {
           <input id={id} type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" disabled={busy} onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
         </label>
         {value && (
-          <span className="relative h-16 w-16 overflow-hidden rounded-xl border border-brand-dark/10">
+          <span className="relative h-16 w-16 overflow-hidden rounded-xl border border-heading/10">
             <Image src={value} alt="Предпросмотр" fill sizes="64px" className="object-cover" unoptimized />
             <button type="button" aria-label="Убрать изображение" onClick={() => onChange("")} className="absolute right-0 top-0 rounded-bl bg-black/60 p-0.5 text-white"><X size={12} /></button>
           </span>

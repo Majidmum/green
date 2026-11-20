@@ -37,11 +37,11 @@ export default function ResetForm() {
     router.refresh();
   }
 
-  if (session === "loading") return <p className="text-center text-sm text-brand-ink/60">Проверяем ссылку…</p>;
+  if (session === "loading") return <p className="text-center text-sm text-body/60">Проверяем ссылку…</p>;
   if (session === "no") {
     return (
       <div className="space-y-4 text-center">
-        <p className="text-sm text-brand-ink/70">Ссылка недействительна или устарела. Запросите новую.</p>
+        <p className="text-sm text-body/70">Ссылка недействительна или устарела. Запросите новую.</p>
         <Link href="/forgot-password" className="btn-primary w-full">Запросить ссылку</Link>
       </div>
     );

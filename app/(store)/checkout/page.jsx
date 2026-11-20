@@ -30,7 +30,7 @@ export default async function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <h1 className="mb-8 font-display text-4xl font-bold text-brand-dark">Оформление заказа</h1>
+      <h1 className="mb-8 font-display text-4xl font-bold text-heading">Оформление заказа</h1>
       <CheckoutForm
         user={{ name: profile?.full_name ?? "", phone: profile?.phone ?? "" }}
         addresses={addresses ?? []}

@@ -51,7 +51,7 @@ export default function OrderTracker({ orderId, deliveryType, initial }) {
     <div>
       <div className="mb-5 flex flex-wrap items-center gap-3">
         <StatusBadge status={state.status} />
-        <span className="flex items-center gap-1.5 text-xs text-brand-ink/50" aria-live="polite">
+        <span className="flex items-center gap-1.5 text-xs text-body/50" aria-live="polite">
           <span className="h-2 w-2 animate-pulse rounded-full bg-brand" /> обновляется автоматически
         </span>
       </div>
@@ -73,18 +73,18 @@ export default function OrderTracker({ orderId, deliveryType, initial }) {
             return (
               <li key={s} className="relative flex gap-4 pb-6 last:pb-0">
                 {i < flow.length - 1 && (
-                  <span className={`absolute left-[15px] top-8 h-[calc(100%-2rem)] w-0.5 ${i < currentIdx ? "bg-brand" : "bg-brand-dark/10"}`} aria-hidden="true" />
+                  <span className={`absolute left-[15px] top-8 h-[calc(100%-2rem)] w-0.5 ${i < currentIdx ? "bg-brand" : "bg-heading/10"}`} aria-hidden="true" />
                 )}
                 <span className={`z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold ${
-                  done ? "border-brand bg-brand text-white" : "border-brand-dark/15 bg-white text-brand-ink/40"
+                  done ? "border-brand bg-brand text-white" : "border-heading/15 bg-surface text-body/40"
                 } ${current ? "ring-4 ring-brand/20" : ""}`}>
                   {done ? <Check size={16} /> : i + 1}
                 </span>
                 <div className="pt-1">
-                  <p className={`text-sm font-semibold ${done ? "text-brand-ink" : "text-brand-ink/40"}`}>{label}</p>
-                  {at(s) && <p className="text-xs text-brand-ink/60">{formatDate(at(s))}</p>}
+                  <p className={`text-sm font-semibold ${done ? "text-body" : "text-body/40"}`}>{label}</p>
+                  {at(s) && <p className="text-xs text-body/60">{formatDate(at(s))}</p>}
                   {s === "handed_to_courier" && done && state.courier_name && (
-                    <p className="mt-1 text-xs text-brand-ink/70">
+                    <p className="mt-1 text-xs text-body/70">
                       Курьер: {state.courier_name}
                       {state.courier_phone && <> · <a className="text-brand hover:underline" href={`tel:${state.courier_phone}`}>{state.courier_phone}</a></>}
                     </p>

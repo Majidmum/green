@@ -1,7 +1,7 @@
 export default function FormField({ label, error, id, children }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-brand-ink">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-body">
         {label}
       </label>
       {children}

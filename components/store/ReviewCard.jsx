@@ -8,11 +8,11 @@ export default function ReviewCard({ review, showProduct = true }) {
     <article className="card flex h-full flex-col gap-3 p-5">
       <div className="flex items-center justify-between gap-3">
         <Stars value={review.rating} />
-        <time className="text-xs text-brand-ink/50" dateTime={review.created_at}>
+        <time className="text-xs text-body/50" dateTime={review.created_at}>
           {formatDay(review.created_at)}
         </time>
       </div>
-      {review.body && <p className="text-sm leading-relaxed text-brand-ink/80">{review.body}</p>}
+      {review.body && <p className="text-sm leading-relaxed text-body/80">{review.body}</p>}
       {review.photo_url && (
         <div className="relative h-32 w-32 overflow-hidden rounded-xl">
           <Image src={review.photo_url} alt="Фото к отзыву" fill sizes="128px" className="object-cover" />

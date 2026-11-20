@@ -22,12 +22,12 @@ export default async function MyReviewsPage() {
 
   return (
     <div>
-      <h1 className="mb-2 font-display text-4xl font-bold text-brand-dark">Мои отзывы</h1>
-      <p className="mb-6 text-sm text-brand-ink/60">Отзыв можно оставить на товар из доставленного заказа — откройте заказ и нажмите «Оставить отзыв».</p>
+      <h1 className="mb-2 font-display text-4xl font-bold text-heading">Мои отзывы</h1>
+      <p className="mb-6 text-sm text-body/60">Отзыв можно оставить на товар из доставленного заказа — откройте заказ и нажмите «Оставить отзыв».</p>
       {!reviews?.length ? (
         <div className="card flex flex-col items-center gap-3 p-12 text-center">
           <MessageSquare size={40} className="text-brand/50" />
-          <p className="text-brand-ink/70">Вы ещё не оставляли отзывов.</p>
+          <p className="text-body/70">Вы ещё не оставляли отзывов.</p>
           <Link href="/orders" className="btn-primary">К моим заказам</Link>
         </div>
       ) : (

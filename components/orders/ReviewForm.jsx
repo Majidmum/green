@@ -44,14 +44,14 @@ export default function ReviewForm({ productId, initial, onDone }) {
       onDone?.();
     });
 
-  if (done) return <p className="rounded-xl bg-brand-light px-4 py-3 text-sm text-brand-dark" role="status">Спасибо! Отзыв появится на сайте после проверки.</p>;
+  if (done) return <p className="rounded-xl bg-tint px-4 py-3 text-sm text-heading" role="status">Спасибо! Отзыв появится на сайте после проверки.</p>;
 
   return (
-    <div className="space-y-3 rounded-2xl border border-brand-dark/10 bg-brand-cream/50 p-4">
+    <div className="space-y-3 rounded-2xl border border-heading/10 bg-page/50 p-4">
       <div className="flex gap-1" role="radiogroup" aria-label="Оценка">
         {[1, 2, 3, 4, 5].map((i) => (
           <button key={i} type="button" role="radio" aria-checked={rating === i} aria-label={`${i} из 5`} onClick={() => setRating(i)}>
-            <Star size={26} className={i <= rating ? "fill-amber-400 text-amber-400" : "text-brand-dark/25"} />
+            <Star size={26} className={i <= rating ? "fill-amber-400 text-amber-400" : "text-heading/25"} />
           </button>
         ))}
       </div>

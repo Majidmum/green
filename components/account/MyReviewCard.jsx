@@ -30,9 +30,9 @@ export default function MyReviewCard({ review, product }) {
         <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${cls}`}>{label}</span>
       </div>
       <Stars value={review.rating} />
-      {review.body && <p className="text-sm text-brand-ink/80">{review.body}</p>}
+      {review.body && <p className="text-sm text-body/80">{review.body}</p>}
       {review.photo_url && <div className="relative h-24 w-24 overflow-hidden rounded-xl"><Image src={review.photo_url} alt="Фото к отзыву" fill sizes="96px" className="object-cover" /></div>}
-      <div className="flex items-center justify-between text-xs text-brand-ink/50">
+      <div className="flex items-center justify-between text-xs text-body/50">
         <span>{formatDay(review.created_at)}</span>
         <span className="flex gap-3">
           <button className="inline-flex items-center gap-1 font-medium text-brand" onClick={() => setEditing(true)}><Pencil size={13} /> Изменить</button>
@@ -42,7 +42,7 @@ export default function MyReviewCard({ review, product }) {
           </button>
         </span>
       </div>
-      {review.status === "rejected" && <p className="text-xs text-brand-ink/60">Отзыв не прошёл модерацию. Вы можете изменить текст и отправить его снова.</p>}
+      {review.status === "rejected" && <p className="text-xs text-body/60">Отзыв не прошёл модерацию. Вы можете изменить текст и отправить его снова.</p>}
       {error && <p className="text-sm text-rose-600" role="alert">{error}</p>}
     </article>
   );

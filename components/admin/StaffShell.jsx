@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -42,7 +43,7 @@ export default function StaffShell({ title, navKey, userName, roleLabel, unread 
   );
 
   return (
-    <div className="min-h-screen bg-brand-cream lg:flex">
+    <div className="min-h-screen bg-page lg:flex">
       <aside className="hidden w-64 shrink-0 bg-brand-dark p-4 print:hidden lg:block">
         <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto">
           <Link href="/" className="mb-6 flex items-center gap-2 px-2 text-white"><Logo size={40} variant="light" /><span className="font-display text-lg font-bold">Green Garden</span></Link>
@@ -61,19 +62,20 @@ export default function StaffShell({ title, navKey, userName, roleLabel, unread 
       )}
 
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-brand-dark/10 bg-white/90 px-4 py-3 backdrop-blur print:hidden sm:px-6">
-          <button className="rounded-full p-2 hover:bg-brand-light lg:hidden" onClick={() => setOpen(true)} aria-label="Открыть меню"><Menu size={20} /></button>
+        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-heading/10 bg-surface/90 px-4 py-3 backdrop-blur print:hidden sm:px-6">
+          <button className="rounded-full p-2 hover:bg-tint lg:hidden" onClick={() => setOpen(true)} aria-label="Открыть меню"><Menu size={20} /></button>
           <div className="mr-auto">
-            <p className="text-sm font-semibold text-brand-dark">{title}</p>
-            <p className="text-xs text-brand-ink/50">{userName} · {roleLabel}</p>
+            <p className="text-sm font-semibold text-heading">{title}</p>
+            <p className="text-xs text-body/50">{userName} · {roleLabel}</p>
           </div>
+          <ThemeToggle className="rounded-full p-2 hover:bg-tint" />
           {notificationsHref && (
-            <Link href={notificationsHref} className="relative rounded-full p-2 hover:bg-brand-light" aria-label={`Уведомления${unread ? `, непрочитанных: ${unread}` : ""}`}>
+            <Link href={notificationsHref} className="relative rounded-full p-2 hover:bg-tint" aria-label={`Уведомления${unread ? `, непрочитанных: ${unread}` : ""}`}>
               <Bell size={20} />
               {unread > 0 && <span className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-rose-600 px-1 text-[11px] font-bold text-white">{unread > 99 ? "99+" : unread}</span>}
             </Link>
           )}
-          <Link href="/" className="rounded-full p-2 hover:bg-brand-light" aria-label="На сайт"><Store size={20} /></Link>
+          <Link href="/" className="rounded-full p-2 hover:bg-tint" aria-label="На сайт"><Store size={20} /></Link>
           <button className="rounded-full p-2 text-rose-600 hover:bg-rose-50" aria-label="Выйти" onClick={async () => { await createClient().auth.signOut(); router.replace("/"); router.refresh(); }}><LogOut size={20} /></button>
         </header>
         <main className="p-4 sm:p-6">{children}</main>

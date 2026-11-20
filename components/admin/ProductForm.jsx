@@ -15,7 +15,7 @@ function F({ id, label, error, hint, children, span }) {
     <div className={span ? "sm:col-span-2" : ""}>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium">{label}</label>
       {children}
-      {hint && !error && <p className="mt-1 text-xs text-brand-ink/50">{hint}</p>}
+      {hint && !error && <p className="mt-1 text-xs text-body/50">{hint}</p>}
       {error && <p className="mt-1 text-xs text-rose-600" role="alert">{error}</p>}
     </div>
   );
@@ -102,7 +102,7 @@ export default function ProductForm({ product, categories, cost }) {
         ))}
       </div>
 
-      {msg && <p className={`rounded-xl px-4 py-3 text-sm ${msg.ok ? "bg-brand-light text-brand-dark" : "bg-rose-50 text-rose-700"}`} role={msg.ok ? "status" : "alert"}>{msg.text}</p>}
+      {msg && <p className={`rounded-xl px-4 py-3 text-sm ${msg.ok ? "bg-tint text-heading" : "bg-rose-50 text-rose-700"}`} role={msg.ok ? "status" : "alert"}>{msg.text}</p>}
       <div className="flex flex-wrap gap-2">
         <button className="btn-primary" disabled={pending}>{pending ? "Сохраняем…" : product ? "Сохранить" : "Создать товар"}</button>
         {product && <button type="button" className="btn-outline !border-rose-300 !text-rose-600" disabled={pending} onClick={onDelete}><Trash2 size={16} /> Удалить</button>}

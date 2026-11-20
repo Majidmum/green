@@ -8,22 +8,22 @@ import { Table2, BarChart3 } from "lucide-react";
 import { aggregateSeries } from "@/lib/analytics/report";
 import { EXPENSE_CATEGORY_LABELS } from "@/lib/admin/resources";
 
-// Палитра проверена скриптом validate_palette (светлая тема): зелёный бренда, синий, янтарный, фиолетовый, розовый, бирюзовый.
-export const C = { green: "#00A651", blue: "#2F6FDE", amber: "#B8700A", violet: "#8E5BD6", pink: "#D6456B", teal: "#0C9AAE" };
-const GRID = "rgba(23,35,27,0.10)";
-const AXIS = { fontSize: 12, fill: "#4b5a50" };
+// Цвета берутся из CSS-переменных (--c-*): светлый и тёмный набор в globals.css. Светлый набор проверен validate_palette: зелёный бренда, синий, янтарный, фиолетовый, розовый, бирюзовый.
+export const C = { green: "var(--c-green)", blue: "var(--c-blue)", amber: "var(--c-amber)", violet: "var(--c-violet)", pink: "var(--c-pink)", teal: "var(--c-teal)" };
+const GRID = "rgb(var(--heading) / 0.12)";
+const AXIS = { fontSize: 12, fill: "rgb(var(--body) / 0.7)" };
 const money = (v) => new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 }).format(Number(v));
 const compact = (v) => new Intl.NumberFormat("ru-RU", { notation: "compact", maximumFractionDigits: 1 }).format(Number(v));
 
 function Tip({ active, payload, label, fmt = money, suffix = "" }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl border border-brand-dark/10 bg-white px-3 py-2 text-xs shadow-lift">
-      <p className="mb-1 font-semibold text-brand-ink">{label}</p>
+    <div className="rounded-xl border border-heading/10 bg-surface px-3 py-2 text-xs shadow-lift">
+      <p className="mb-1 font-semibold text-body">{label}</p>
       {payload.map((p) => (
-        <p key={p.dataKey} className="flex items-center gap-2 text-brand-ink/80">
+        <p key={p.dataKey} className="flex items-center gap-2 text-body/80">
           <span className="h-2.5 w-2.5 rounded-sm" style={{ background: p.color ?? p.fill ?? p.stroke }} />
-          {p.name}: <strong className="text-brand-ink">{fmt(p.value)}{suffix}</strong>
+          {p.name}: <strong className="text-body">{fmt(p.value)}{suffix}</strong>
         </p>
       ))}
     </div>
@@ -36,21 +36,21 @@ function ChartCard({ title, subtitle, empty, table, controls, children }) {
   return (
     <section className="card p-4 sm:p-5">
       <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-        <div><h3 className="font-display text-lg font-bold text-brand-dark">{title}</h3>{subtitle && <p className="text-xs text-brand-ink/60">{subtitle}</p>}</div>
+        <div><h3 className="font-display text-lg font-bold text-heading">{title}</h3>{subtitle && <p className="text-xs text-body/60">{subtitle}</p>}</div>
         <div className="flex items-center gap-2 print:hidden">
           {controls}
           {table && !empty && (
-            <button className="rounded-full border border-brand-dark/15 p-2 text-brand-dark hover:bg-brand-light" onClick={() => setView(view === "chart" ? "table" : "chart")} aria-label={view === "chart" ? "Показать таблицей" : "Показать графиком"} title={view === "chart" ? "Таблица" : "График"}>
+            <button className="rounded-full border border-heading/15 p-2 text-heading hover:bg-tint" onClick={() => setView(view === "chart" ? "table" : "chart")} aria-label={view === "chart" ? "Показать таблицей" : "Показать графиком"} title={view === "chart" ? "Таблица" : "График"}>
               {view === "chart" ? <Table2 size={15} /> : <BarChart3 size={15} />}
             </button>
           )}
         </div>
       </div>
-      {empty ? <p className="py-12 text-center text-sm text-brand-ink/50">За выбранный период данных нет</p> : view === "table" && table ? (
+      {empty ? <p className="py-12 text-center text-sm text-body/50">За выбранный период данных нет</p> : view === "table" && table ? (
         <div className="max-h-72 overflow-auto">
           <table className="w-full text-left text-sm">
-            <thead className="sticky top-0 bg-white text-xs uppercase text-brand-ink/50"><tr>{table.columns.map((c) => <th key={c} className="py-1.5 pr-3">{c}</th>)}</tr></thead>
-            <tbody className="divide-y divide-brand-dark/5">{table.rows.map((r, i) => <tr key={i}>{r.map((v, j) => <td key={j} className="py-1.5 pr-3">{v}</td>)}</tr>)}</tbody>
+            <thead className="sticky top-0 bg-surface text-xs uppercase text-body/50"><tr>{table.columns.map((c) => <th key={c} className="py-1.5 pr-3">{c}</th>)}</tr></thead>
+            <tbody className="divide-y divide-heading/5">{table.rows.map((r, i) => <tr key={i}>{r.map((v, j) => <td key={j} className="py-1.5 pr-3">{v}</td>)}</tr>)}</tbody>
           </table>
         </div>
       ) : children}
@@ -60,9 +60,9 @@ function ChartCard({ title, subtitle, empty, table, controls, children }) {
 
 function GranToggle({ gran, setGran }) {
   return (
-    <div className="flex rounded-full bg-brand-light/60 p-0.5 text-xs font-medium" role="group" aria-label="Группировка">
+    <div className="flex rounded-full bg-tint/60 p-0.5 text-xs font-medium" role="group" aria-label="Группировка">
       {[["day", "Дни"], ["week", "Недели"], ["month", "Месяцы"]].map(([k, l]) => (
-        <button key={k} onClick={() => setGran(k)} aria-pressed={gran === k} className={`rounded-full px-2.5 py-1 ${gran === k ? "bg-white shadow-soft text-brand-dark" : "text-brand-ink/60"}`}>{l}</button>
+        <button key={k} onClick={() => setGran(k)} aria-pressed={gran === k} className={`rounded-full px-2.5 py-1 ${gran === k ? "bg-surface shadow-soft text-heading" : "text-body/60"}`}>{l}</button>
       ))}
     </div>
   );

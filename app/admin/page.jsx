@@ -31,22 +31,22 @@ export default async function AdminDashboard() {
       </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className="card p-4">
-          <div className="mb-3 flex items-center justify-between"><h2 className="font-semibold text-brand-dark">Последние заказы</h2><Link href="/admin/orders" className="text-sm text-brand hover:underline">Все заказы</Link></div>
+          <div className="mb-3 flex items-center justify-between"><h2 className="font-semibold text-heading">Последние заказы</h2><Link href="/admin/orders" className="text-sm text-brand hover:underline">Все заказы</Link></div>
           {recent.data?.length ? (
-            <ul className="divide-y divide-brand-ink/10">
+            <ul className="divide-y divide-body/10">
               {recent.data.map((o) => (
                 <li key={o.id} className="flex items-center justify-between gap-3 py-2 text-sm">
-                  <div><Link href={`/admin/orders/${o.id}`} className="font-semibold text-brand hover:underline">№ {o.order_number}</Link><p className="text-xs text-brand-ink/50">{o.customer_name} · {formatDate(o.created_at)}</p></div>
+                  <div><Link href={`/admin/orders/${o.id}`} className="font-semibold text-brand hover:underline">№ {o.order_number}</Link><p className="text-xs text-body/50">{o.customer_name} · {formatDate(o.created_at)}</p></div>
                   <div className="text-right"><StatusBadge status={o.status} /><p className="mt-1 font-semibold">{formatMoney(o.total)}</p></div>
                 </li>
               ))}
             </ul>
-          ) : <p className="text-sm text-brand-ink/60">Заказов пока нет.</p>}
+          ) : <p className="text-sm text-body/60">Заказов пока нет.</p>}
         </section>
         <section className="card p-4">
-          <div className="mb-3 flex items-center justify-between"><h2 className="font-semibold text-brand-dark">Заканчивается на складе</h2><Link href="/admin/stock" className="text-sm text-brand hover:underline">Остатки</Link></div>
+          <div className="mb-3 flex items-center justify-between"><h2 className="font-semibold text-heading">Заканчивается на складе</h2><Link href="/admin/stock" className="text-sm text-brand hover:underline">Остатки</Link></div>
           {stock.data?.length ? (
-            <ul className="divide-y divide-brand-ink/10">
+            <ul className="divide-y divide-body/10">
               {stock.data.map((p) => (
                 <li key={p.product_id} className="flex items-center justify-between py-2 text-sm">
                   <span>{p.name}</span>
@@ -54,7 +54,7 @@ export default async function AdminDashboard() {
                 </li>
               ))}
             </ul>
-          ) : <p className="text-sm text-brand-ink/60">Все позиции в достаточном количестве.</p>}
+          ) : <p className="text-sm text-body/60">Все позиции в достаточном количестве.</p>}
         </section>
       </div>
     </>

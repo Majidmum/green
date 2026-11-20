@@ -6,7 +6,7 @@ export default function ProductImage({ src, alt, className = "", priority = fals
   if (!src) {
     return (
       <div
-        className={`relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-brand-light to-white text-brand/50 ${className}`}
+        className={`relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-tint to-surface text-brand/50 ${className}`}
         role="img"
         aria-label={alt}
       >

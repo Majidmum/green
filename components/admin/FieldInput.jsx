@@ -9,7 +9,7 @@ export default function FieldInput({ f, control, register, error, options, id })
     <div className={f.type === "textarea" || f.type === "image" ? "sm:col-span-2" : ""}>
       {f.type !== "checkbox" && <label htmlFor={id} className="mb-1.5 block text-sm font-medium">{f.label}{f.required && <span className="text-rose-500"> *</span>}</label>}
       {child}
-      {f.hint && !error && <p className="mt-1 text-xs text-brand-ink/50">{f.hint}</p>}
+      {f.hint && !error && <p className="mt-1 text-xs text-body/50">{f.hint}</p>}
       {error && <p className="mt-1 text-xs text-rose-600" role="alert">{error}</p>}
     </div>
   );

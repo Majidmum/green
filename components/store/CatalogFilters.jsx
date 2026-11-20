@@ -18,7 +18,7 @@ export function SortSelect({ params }) {
   const { go, pending } = useNavigate(params);
   return (
     <label className="flex items-center gap-2 text-sm">
-      <span className="text-brand-ink/60">Сортировка:</span>
+      <span className="text-body/60">Сортировка:</span>
       <select
         value={params.sort}
         onChange={(e) => go({ sort: e.target.value })}
@@ -36,10 +36,10 @@ export function SortSelect({ params }) {
 export function ViewToggle({ params }) {
   const item = "flex h-10 w-10 items-center justify-center rounded-full transition";
   return (
-    <div className="flex rounded-full bg-white p-0.5 shadow-soft" role="group" aria-label="Вид каталога">
+    <div className="flex rounded-full bg-surface p-0.5 shadow-soft" role="group" aria-label="Вид каталога">
       <Link
         href={`/catalog${buildCatalogQuery(params, { view: "grid" })}`}
-        className={`${item} ${params.view === "grid" ? "bg-brand text-white" : "text-brand-dark hover:bg-brand-light"}`}
+        className={`${item} ${params.view === "grid" ? "bg-brand text-white" : "text-heading hover:bg-tint"}`}
         aria-label="Плитка"
         aria-pressed={params.view === "grid"}
       >
@@ -47,7 +47,7 @@ export function ViewToggle({ params }) {
       </Link>
       <Link
         href={`/catalog${buildCatalogQuery(params, { view: "list" })}`}
-        className={`${item} ${params.view === "list" ? "bg-brand text-white" : "text-brand-dark hover:bg-brand-light"}`}
+        className={`${item} ${params.view === "list" ? "bg-brand text-white" : "text-heading hover:bg-tint"}`}
         aria-label="Список"
         aria-pressed={params.view === "list"}
       >
@@ -80,7 +80,7 @@ export default function CatalogFilters({ tree, params }) {
       href={link({ category: c.slug })}
       aria-current={params.category === c.slug ? "true" : undefined}
       className={`block rounded-lg px-3 py-2 text-sm transition ${nested ? "ml-4" : ""} ${
-        params.category === c.slug ? "bg-brand-light font-semibold text-brand-dark" : "hover:bg-brand-light/60"
+        params.category === c.slug ? "bg-tint font-semibold text-heading" : "hover:bg-tint/60"
       }`}
     >
       {c.name}
@@ -112,17 +112,17 @@ export default function CatalogFilters({ tree, params }) {
             className="input pr-11"
             aria-label="Поиск товаров"
           />
-          <button type="submit" className="absolute right-1.5 top-1.5 flex h-9 w-9 items-center justify-center rounded-full text-brand hover:bg-brand-light" aria-label="Искать">
+          <button type="submit" className="absolute right-1.5 top-1.5 flex h-9 w-9 items-center justify-center rounded-full text-brand hover:bg-tint" aria-label="Искать">
             <Search size={18} />
           </button>
         </form>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-brand-ink/50">Категории</h2>
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-body/50">Категории</h2>
           <nav className="space-y-0.5" aria-label="Категории">
             <Link
               href={link({ category: "" })}
-              className={`block rounded-lg px-3 py-2 text-sm transition ${!params.category ? "bg-brand-light font-semibold text-brand-dark" : "hover:bg-brand-light/60"}`}
+              className={`block rounded-lg px-3 py-2 text-sm transition ${!params.category ? "bg-tint font-semibold text-heading" : "hover:bg-tint/60"}`}
             >
               Все товары
             </Link>
@@ -136,13 +136,13 @@ export default function CatalogFilters({ tree, params }) {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-brand-ink/50">Цена, сом.</h2>
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-body/50">Цена, сом.</h2>
           <form
             onSubmit={(e) => { e.preventDefault(); go({ min: toNum(min), max: toNum(max) }); }}
             className="flex items-center gap-2"
           >
             <input value={min} onChange={(e) => setMin(e.target.value)} inputMode="decimal" placeholder="от" className="input !px-3" aria-label="Цена от" />
-            <span className="text-brand-ink/40">—</span>
+            <span className="text-body/40">—</span>
             <input value={max} onChange={(e) => setMax(e.target.value)} inputMode="decimal" placeholder="до" className="input !px-3" aria-label="Цена до" />
             <button type="submit" className="btn-primary !px-4">ОК</button>
           </form>
@@ -159,7 +159,7 @@ export default function CatalogFilters({ tree, params }) {
                 type="checkbox"
                 checked={params[key]}
                 onChange={(e) => go({ [key]: e.target.checked })}
-                className="h-4 w-4 rounded border-brand-dark/30 accent-brand"
+                className="h-4 w-4 rounded border-heading/30 accent-brand"
               />
               {label}
             </label>

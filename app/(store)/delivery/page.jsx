@@ -15,10 +15,10 @@ export default async function DeliveryPage() {
     <LegalPage page={page}>
       {zones.length > 0 && (
         <section className="mt-10" aria-labelledby="zones-title">
-          <h2 id="zones-title" className="font-display text-2xl font-bold text-brand-dark">Зоны и стоимость доставки</h2>
-          <div className="mt-4 overflow-x-auto rounded-xl2 bg-white shadow-soft">
+          <h2 id="zones-title" className="font-display text-2xl font-bold text-heading">Зоны и стоимость доставки</h2>
+          <div className="mt-4 overflow-x-auto rounded-xl2 bg-surface shadow-soft">
             <table className="w-full text-left text-sm">
-              <thead className="bg-brand-light text-brand-dark">
+              <thead className="bg-tint text-heading">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Район</th>
                   <th className="px-4 py-3 font-semibold">Стоимость</th>
@@ -26,7 +26,7 @@ export default async function DeliveryPage() {
                   <th className="px-4 py-3 font-semibold">Мин. заказ</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-dark/10">
+              <tbody className="divide-y divide-heading/10">
                 {zones.map((z) => (
                   <tr key={z.id}>
                     <td className="px-4 py-3 font-medium">{z.name}</td>
@@ -41,8 +41,8 @@ export default async function DeliveryPage() {
         </section>
       )}
       <section className="mt-10">
-        <h2 className="font-display text-2xl font-bold text-brand-dark">Способы оплаты</h2>
-        <ul className="mt-3 list-disc space-y-1 pl-5 text-brand-ink/85">
+        <h2 className="font-display text-2xl font-bold text-heading">Способы оплаты</h2>
+        <ul className="mt-3 list-disc space-y-1 pl-5 text-body/85">
           <li>Наличными курьеру при доставке.</li>
           <li>При самовывозе — оплата на месте.</li>
         </ul>

@@ -54,16 +54,16 @@ export default async function AuditLog({ searchParams, basePath }) {
       </form>
       <div className="card overflow-x-auto">
         <table className="w-full min-w-[820px] text-left text-sm">
-          <thead className="border-b border-brand-dark/10 text-xs uppercase tracking-wide text-brand-ink/50"><tr><th className="px-4 py-3">Когда</th><th className="px-4 py-3">Кто</th><th className="px-4 py-3">Раздел</th><th className="px-4 py-3">Действие</th><th className="px-4 py-3">Что изменилось</th></tr></thead>
-          <tbody className="divide-y divide-brand-dark/5">
-            {!data?.length && <tr><td colSpan={5} className="px-4 py-10 text-center text-brand-ink/50">Записей нет</td></tr>}
+          <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Когда</th><th className="px-4 py-3">Кто</th><th className="px-4 py-3">Раздел</th><th className="px-4 py-3">Действие</th><th className="px-4 py-3">Что изменилось</th></tr></thead>
+          <tbody className="divide-y divide-heading/5">
+            {!data?.length && <tr><td colSpan={5} className="px-4 py-10 text-center text-body/50">Записей нет</td></tr>}
             {(data ?? []).map((a) => (
               <tr key={a.id}>
-                <td className="whitespace-nowrap px-4 py-2.5 text-brand-ink/70">{formatDate(a.created_at)}</td>
-                <td className="px-4 py-2.5">{a.actor_id ? who.get(a.actor_id) || "Сотрудник" : <span className="text-brand-ink/40">система</span>}</td>
+                <td className="whitespace-nowrap px-4 py-2.5 text-body/70">{formatDate(a.created_at)}</td>
+                <td className="px-4 py-2.5">{a.actor_id ? who.get(a.actor_id) || "Сотрудник" : <span className="text-body/40">система</span>}</td>
                 <td className="px-4 py-2.5">{TABLES[a.table_name] ?? a.table_name}</td>
                 <td className="px-4 py-2.5">{ACTIONS[a.action] ?? a.action}</td>
-                <td className="max-w-md break-words px-4 py-2.5 text-xs text-brand-ink/70">{changes(a)}</td>
+                <td className="max-w-md break-words px-4 py-2.5 text-xs text-body/70">{changes(a)}</td>
               </tr>
             ))}
           </tbody>

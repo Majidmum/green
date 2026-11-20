@@ -21,16 +21,16 @@ export default function CartView({ isLoggedIn }) {
   const clear = useCart((s) => s.clear);
   const promo = usePromo(subtotal, isLoggedIn);
 
-  if (!hydrated) return <div className="h-64 animate-pulse rounded-xl2 bg-white/60" aria-busy="true" />;
+  if (!hydrated) return <div className="h-64 animate-pulse rounded-xl2 bg-surface/60" aria-busy="true" />;
 
   if (items.length === 0) {
     return (
       <div className="card flex flex-col items-center gap-4 px-6 py-20 text-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-light text-brand">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-tint text-brand">
           <ShoppingBasket size={30} />
         </span>
         <h2 className="text-xl font-semibold">Корзина пуста</h2>
-        <p className="text-brand-ink/60">Добавьте товары из каталога.</p>
+        <p className="text-body/60">Добавьте товары из каталога.</p>
         <Link href="/catalog" className="btn-primary">Перейти в каталог</Link>
       </div>
     );
@@ -60,13 +60,13 @@ export default function CartView({ isLoggedIn }) {
                   <button
                     type="button"
                     onClick={() => remove(i.productId)}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-brand-ink/50 transition hover:bg-rose-50 hover:text-rose-600"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-body/50 transition hover:bg-rose-50 hover:text-rose-600"
                     aria-label={`Удалить ${i.name}`}
                   >
                     <Trash2 size={17} />
                   </button>
                 </div>
-                <p className="text-sm text-brand-ink/60">{formatMoney(i.price)} / {unitLabel(i.unit)}</p>
+                <p className="text-sm text-body/60">{formatMoney(i.price)} / {unitLabel(i.unit)}</p>
                 <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
                   {i.outOfStock ? (
                     <span className="text-sm font-medium text-rose-600">Нет в наличии</span>
@@ -80,7 +80,7 @@ export default function CartView({ isLoggedIn }) {
                       label={`Количество: ${i.name}`}
                     />
                   )}
-                  <span className="text-lg font-bold text-brand-dark">
+                  <span className="text-lg font-bold text-heading">
                     {i.outOfStock ? "—" : formatMoney(Math.round(i.price * i.quantity * 100) / 100)}
                   </span>
                 </div>
@@ -88,22 +88,22 @@ export default function CartView({ isLoggedIn }) {
             </li>
           ))}
           <li>
-            <button type="button" onClick={clear} className="text-sm text-brand-ink/60 underline hover:text-rose-600">
+            <button type="button" onClick={clear} className="text-sm text-body/60 underline hover:text-rose-600">
               Очистить корзину
             </button>
           </li>
         </ul>
 
         <aside className="card h-fit space-y-5 p-6 lg:sticky lg:top-24">
-          <h2 className="font-display text-2xl font-bold text-brand-dark">Ваш заказ</h2>
+          <h2 className="font-display text-2xl font-bold text-heading">Ваш заказ</h2>
           <PromoBox promo={promo} isLoggedIn={isLoggedIn} />
-          <dl className="space-y-2 border-t border-brand-dark/10 pt-4 text-sm">
-            <div className="flex justify-between"><dt className="text-brand-ink/70">Товары</dt><dd>{formatMoney(totals.subtotal)}</dd></div>
+          <dl className="space-y-2 border-t border-heading/10 pt-4 text-sm">
+            <div className="flex justify-between"><dt className="text-body/70">Товары</dt><dd>{formatMoney(totals.subtotal)}</dd></div>
             {totals.discount > 0 && (
               <div className="flex justify-between text-brand"><dt>Промокод</dt><dd>−{formatMoney(totals.discount)}</dd></div>
             )}
-            <div className="flex justify-between text-brand-ink/60"><dt>Доставка</dt><dd>рассчитывается при оформлении</dd></div>
-            <div className="flex justify-between border-t border-brand-dark/10 pt-3 text-lg font-bold">
+            <div className="flex justify-between text-body/60"><dt>Доставка</dt><dd>рассчитывается при оформлении</dd></div>
+            <div className="flex justify-between border-t border-heading/10 pt-3 text-lg font-bold">
               <dt>Итого</dt><dd>{formatMoney(totals.total)}</dd>
             </div>
           </dl>

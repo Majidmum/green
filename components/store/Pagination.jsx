@@ -22,26 +22,26 @@ export default function Pagination({ params, total, basePath = "/catalog" }) {
   return (
     <nav className="mt-10 flex items-center justify-center gap-1.5" aria-label="Страницы каталога">
       {params.page > 1 ? (
-        <Link href={href(params.page - 1)} className={`${item} bg-white shadow-soft hover:bg-brand-light`} aria-label="Предыдущая страница">
+        <Link href={href(params.page - 1)} className={`${item} bg-surface shadow-soft hover:bg-tint`} aria-label="Предыдущая страница">
           <ChevronLeft size={18} />
         </Link>
       ) : null}
       {pageList(params.page, last).map((p) =>
         typeof p === "string" ? (
-          <span key={p} className="px-1 text-brand-ink/40" aria-hidden="true">…</span>
+          <span key={p} className="px-1 text-body/40" aria-hidden="true">…</span>
         ) : (
           <Link
             key={p}
             href={href(p)}
             aria-current={p === params.page ? "page" : undefined}
-            className={`${item} ${p === params.page ? "bg-brand text-white" : "bg-white shadow-soft hover:bg-brand-light"}`}
+            className={`${item} ${p === params.page ? "bg-brand text-white" : "bg-surface shadow-soft hover:bg-tint"}`}
           >
             {p}
           </Link>
         )
       )}
       {params.page < last ? (
-        <Link href={href(params.page + 1)} className={`${item} bg-white shadow-soft hover:bg-brand-light`} aria-label="Следующая страница">
+        <Link href={href(params.page + 1)} className={`${item} bg-surface shadow-soft hover:bg-tint`} aria-label="Следующая страница">
           <ChevronRight size={18} />
         </Link>
       ) : null}

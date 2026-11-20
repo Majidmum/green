@@ -21,24 +21,24 @@ export default function SimplePagination({ page, total, pageSize, basePath, quer
   return (
     <nav className="mt-6 flex flex-wrap items-center justify-center gap-1.5" aria-label="Страницы">
       {page > 1 && (
-        <Link href={pageHref(basePath, query, page - 1)} className={`${item} bg-white shadow-soft hover:bg-brand-light`} aria-label="Назад">
+        <Link href={pageHref(basePath, query, page - 1)} className={`${item} bg-surface shadow-soft hover:bg-tint`} aria-label="Назад">
           <ChevronLeft size={16} />
         </Link>
       )}
       {pages.map((p, i) => (
         <span key={p} className="flex items-center gap-1.5">
-          {i > 0 && p - pages[i - 1] > 1 && <span className="text-brand-ink/40">…</span>}
+          {i > 0 && p - pages[i - 1] > 1 && <span className="text-body/40">…</span>}
           <Link
             href={pageHref(basePath, query, p)}
             aria-current={p === page ? "page" : undefined}
-            className={`${item} ${p === page ? "bg-brand text-white" : "bg-white shadow-soft hover:bg-brand-light"}`}
+            className={`${item} ${p === page ? "bg-brand text-white" : "bg-surface shadow-soft hover:bg-tint"}`}
           >
             {p}
           </Link>
         </span>
       ))}
       {page < last && (
-        <Link href={pageHref(basePath, query, page + 1)} className={`${item} bg-white shadow-soft hover:bg-brand-light`} aria-label="Вперёд">
+        <Link href={pageHref(basePath, query, page + 1)} className={`${item} bg-surface shadow-soft hover:bg-tint`} aria-label="Вперёд">
           <ChevronRight size={16} />
         </Link>
       )}

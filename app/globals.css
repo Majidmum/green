@@ -10,6 +10,33 @@
 .gg-drift { animation: gg-drift 20s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .gg-drift { animation: none; } }
 
+/* Цвета темы (каналы RGB, чтобы работали прозрачности вида bg-surface/60) */
+:root {
+  --page: 250 248 242;
+  --surface: 255 255 255;
+  --tint: 232 245 233;
+  --heading: 18 61 42;
+  --body: 23 35 27;
+  --c-green: #00a651; --c-blue: #2f6fde; --c-amber: #b8700a; --c-violet: #8e5bd6; --c-pink: #d6456b; --c-teal: #0c9aae;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --page: 12 20 15;
+  --surface: 21 33 26;
+  --tint: 30 56 41;
+  --heading: 232 245 236;
+  --body: 214 227 218;
+  --c-green: #10b060; --c-blue: #5b8def; --c-amber: #c98322; --c-violet: #9670ee; --c-pink: #e75c7e; --c-teal: #1fa6bb;
+  color-scheme: dark;
+}
+/* Печать всегда светлая */
+@media print {
+  :root[data-theme="dark"] {
+    --page: 255 255 255; --surface: 255 255 255; --tint: 232 245 233; --heading: 18 61 42; --body: 23 35 27;
+    color-scheme: light;
+  }
+}
+
 :root {
   --gg-dark-green: #123d2a;
   --gg-green: #00a651;
@@ -24,8 +51,8 @@ html {
 }
 
 body {
-  background: var(--gg-cream);
-  color: var(--gg-ink);
+  background: rgb(var(--page));
+  color: rgb(var(--body));
 }
 
 @layer components {
@@ -36,16 +63,16 @@ body {
     @apply btn bg-brand text-white shadow-soft hover:bg-brand-dark;
   }
   .btn-outline {
-    @apply btn border border-brand-dark/20 bg-white text-brand-dark hover:border-brand hover:text-brand;
+    @apply btn border border-heading/20 bg-surface text-heading hover:border-brand hover:text-brand;
   }
   .card {
-    @apply rounded-xl2 bg-white shadow-soft;
+    @apply rounded-xl2 bg-surface shadow-soft;
   }
   .input {
-    @apply w-full rounded-xl border border-brand-dark/15 bg-white px-4 py-3 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20;
+    @apply w-full rounded-xl border border-heading/15 bg-surface px-4 py-3 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20;
   }
   .glass {
-    @apply border border-white/40 bg-white/60 backdrop-blur-md;
+    @apply border border-white/40 bg-surface/60 backdrop-blur-md;
   }
 }
 
@@ -59,3 +86,36 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* ===== Тёмная тема: цветные плашки статусов и тени ===== */
+[data-theme="dark"] .shadow-soft { box-shadow: 0 0 0 1px rgb(var(--heading) / 0.07), 0 8px 28px rgba(0, 0, 0, 0.35); }
+[data-theme="dark"] .shadow-lift { box-shadow: 0 0 0 1px rgb(var(--heading) / 0.1), 0 16px 48px rgba(0, 0, 0, 0.5); }
+[data-theme="dark"] .bg-rose-50 { background-color: rgb(244 63 94 / 0.12); }
+[data-theme="dark"] .bg-rose-100 { background-color: rgb(244 63 94 / 0.2); }
+[data-theme="dark"] .bg-amber-50 { background-color: rgb(245 158 11 / 0.12); }
+[data-theme="dark"] .bg-amber-100 { background-color: rgb(245 158 11 / 0.2); }
+[data-theme="dark"] .bg-emerald-100 { background-color: rgb(16 185 129 / 0.2); }
+[data-theme="dark"] .bg-sky-100 { background-color: rgb(14 165 233 / 0.2); }
+[data-theme="dark"] .bg-orange-100 { background-color: rgb(249 115 22 / 0.2); }
+[data-theme="dark"] .bg-gray-100 { background-color: rgb(255 255 255 / 0.08); }
+[data-theme="dark"] .bg-gray-200 { background-color: rgb(255 255 255 / 0.14); }
+[data-theme="dark"] .text-rose-500,
+[data-theme="dark"] .text-rose-600 { color: #fb7185; }
+[data-theme="dark"] .text-rose-700 { color: #fda4af; }
+[data-theme="dark"] .text-amber-600 { color: #fbbf24; }
+[data-theme="dark"] .text-amber-700,
+[data-theme="dark"] .text-amber-800,
+[data-theme="dark"] .text-amber-900 { color: #fcd34d; }
+[data-theme="dark"] .text-emerald-600,
+[data-theme="dark"] .text-emerald-700 { color: #34d399; }
+[data-theme="dark"] .text-emerald-800 { color: #6ee7b7; }
+[data-theme="dark"] .text-sky-800 { color: #7dd3fc; }
+[data-theme="dark"] .text-orange-800 { color: #fdba74; }
+[data-theme="dark"] .text-gray-700 { color: rgb(var(--body)); }
+[data-theme="dark"] .border-rose-200 { border-color: rgb(244 63 94 / 0.3); }
+[data-theme="dark"] .border-rose-300,
+[data-theme="dark"] .border-rose-400 { border-color: rgb(244 63 94 / 0.5); }
+[data-theme="dark"] .border-gray-300 { border-color: rgb(255 255 255 / 0.2); }
+[data-theme="dark"] .hover\:bg-rose-50:hover { background-color: rgb(244 63 94 / 0.14); }
+[data-theme="dark"] .hover\:text-rose-600:hover { color: #fda4af; }

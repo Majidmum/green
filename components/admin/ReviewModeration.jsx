@@ -17,10 +17,10 @@ export default function ReviewModeration({ review }) {
   return (
     <article className="card space-y-3 p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div><p className="font-semibold">{review.product_name}</p><p className="text-xs text-brand-ink/60">{review.author} · {formatDate(review.created_at)}</p></div>
+        <div><p className="font-semibold">{review.product_name}</p><p className="text-xs text-body/60">{review.author} · {formatDate(review.created_at)}</p></div>
         <Stars value={review.rating} />
       </div>
-      {review.body ? <p className="text-sm text-brand-ink/80">{review.body}</p> : <p className="text-sm italic text-brand-ink/40">Без текста</p>}
+      {review.body ? <p className="text-sm text-body/80">{review.body}</p> : <p className="text-sm italic text-body/40">Без текста</p>}
       {review.photo_url && <div className="relative h-28 w-28 overflow-hidden rounded-xl"><Image src={review.photo_url} alt="Фото отзыва" fill sizes="112px" className="object-cover" unoptimized /></div>}
       <div className="flex flex-wrap gap-2">
         {review.status !== "approved" && <button className="btn-primary !px-4 !py-2 text-xs" disabled={pending} onClick={() => run(() => moderateReview({ id: review.id, status: "approved" }))}><Check size={14} /> Одобрить</button>}

@@ -20,7 +20,7 @@ const FAQ = [
 export default function FaqPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="font-display text-4xl font-bold text-brand-dark">Вопросы и ответы</h1>
+      <h1 className="font-display text-4xl font-bold text-heading">Вопросы и ответы</h1>
       <div className="mt-8 space-y-3">
         {FAQ.map(([q, a]) => (
           <details key={q} className="card group p-5">
@@ -28,7 +28,7 @@ export default function FaqPage() {
               {q}
               <ChevronDown size={20} className="shrink-0 text-brand transition group-open:rotate-180" />
             </summary>
-            <p className="mt-3 leading-relaxed text-brand-ink/75">
+            <p className="mt-3 leading-relaxed text-body/75">
               {a ?? (
                 <>
                   Стоимость и зоны доставки указаны на странице <Link href="/delivery" className="text-brand underline">«Доставка и оплата»</Link>.
