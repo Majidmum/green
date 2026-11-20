@@ -399,6 +399,57 @@ await as(A);
   ok("28000 → needLogin", mapRpcError({ code: "28000", message: "x" }).needLogin === true);
 }
 
+console.log("\n== Этап 7: отчёты и обзор склада ==");
+{
+  const day = (await rows("select (now() at time zone 'Asia/Dushanbe')::date::text d, ((now() at time zone 'Asia/Dushanbe')::date - 1)::text y, ((now() at time zone 'Asia/Dushanbe')::date + 1)::text t"))[0];
+  await as(A);
+  ok("клиент не вызывает report_dashboard", await fails("select report_dashboard($1,$2)", [day.y, day.t], "Недостаточно прав"));
+  ok("клиент не вызывает admin_customers", await fails("select * from admin_customers()", [], "Недостаточно прав"));
+  ok("клиент не меняет закупочную цену", await fails("select set_product_cost($1, 1, 'x')", [apples], "Недостаточно прав"));
+  ok("клиент не видит stock_overview", (await rows("select count(*)::int n from stock_overview"))[0].n === 0);
+  await as(null, "anon");
+  ok("anon не вызывает report_dashboard", await fails("select report_dashboard($1,$2)", [day.y, day.t], "permission denied"));
+
+  await as(MGR);
+  const rep = (await rows("select report_dashboard($1,$2) r", [day.y, day.t]))[0].r;
+  const k = rep.kpis;
+  await sys();
+  const exp = (await rows(`select
+    (select coalesce(sum(total),0) from orders where status='delivered') as rev,
+    (select coalesce(sum(refund_amount),0) from order_returns) as ret,
+    (select coalesce(sum(oi.unit_cost*oi.quantity),0) from order_items oi join orders o on o.id=oi.order_id where o.status='delivered') as cogs,
+    (select coalesce(sum(unit_cost*quantity) filter (where restocked),0) from order_returns) as cogs_ret,
+    (select coalesce(sum(abs(quantity_change)*unit_cost),0) from inventory_transactions where type='write_off') as wo,
+    (select coalesce(sum(amount),0) from expenses where not is_voided) as ex`))[0];
+  await as(MGR);
+  const near = (a, b) => Math.abs(Number(a) - Number(b)) < 0.01;
+  ok("выручка = доставленные − возвраты (независимый расчёт)", near(k.revenue, Number(exp.rev) - Number(exp.ret)), `${k.revenue} vs ${exp.rev}-${exp.ret}`);
+  ok("себестоимость = проданное − возвращённое на склад", near(k.cogs, Number(exp.cogs) - Number(exp.cogs_ret)), `${k.cogs}`);
+  ok("валовая = выручка − себестоимость", near(k.gross_profit, k.revenue - k.cogs));
+  ok("списания считаются по порче/потерям", near(k.writeoffs, exp.wo) && Number(k.writeoffs) > 0, `${k.writeoffs}`);
+  ok("аннулированный расход не учитывается", Number(k.expenses) === 0, `${k.expenses}`);
+  ok("чистая = валовая − расходы − списания", near(k.net_profit, k.gross_profit - k.expenses - k.writeoffs));
+  ok("ряд по дням: 3 дня, сумма выручки = KPI", rep.series.length === 3 && near(rep.series.reduce((a, r) => a + Number(r.revenue), 0), k.revenue), JSON.stringify(rep.series.map(r => r.revenue)));
+  ok("есть топ товаров и категорий", rep.top_products.length > 0 && rep.top_categories.length > 0);
+  ok("по часам: 24 значения", rep.by_hour.length === 24);
+  ok("остаток склада не смешан с выручкой", Number(k.stock_value) > 0 && !near(k.stock_value, k.revenue));
+  ok("сотрудники: админ с действиями", rep.staff.some(x => x.id === ADMIN && Number(x.actions) > 0 && Number(x.orders_handled) >= 1), JSON.stringify(rep.staff.map(x => [x.role, x.actions, x.orders_handled])));
+  ok("неверный период отклонён", await fails("select report_dashboard($1,$2)", [day.t, day.y], "Неверный период"));
+  ok("слишком длинный период отклонён", await fails("select report_dashboard('2020-01-01',$1)", [day.t], "800"));
+  ok("менеджер видит stock_overview", (await rows("select count(*)::int n from stock_overview"))[0].n > 0);
+  const cu = await rows("select * from admin_customers(null, 20, 0)");
+  ok("менеджер видит клиентов со статистикой", cu.length >= 1 && Number(cu[0].total_count) >= 1 && cu.some(c => c.id === A && Number(c.orders_count) >= 1));
+  ok("поиск клиента по телефону", (await rows("select * from admin_customers('911111111', 20, 0)")).length === 1);
+  ok("поиск экранирует % и _", (await rows("select * from admin_customers('%', 20, 0)")).length === 0);
+  ok("менеджер НЕ меняет закупочную цену", await fails("select set_product_cost($1, 1, 'x')", [apples], "Недостаточно прав"));
+
+  await as(ADMIN);
+  await db.query("select set_product_cost($1, 9.5, 'пересчёт')", [apples]);
+  await sys();
+  ok("закупочная цена изменена", Number((await rows("select avg_cost from inventory where product_id=$1", [apples]))[0].avg_cost) === 9.5);
+  ok("смена цены записана в аудит", (await rows("select count(*)::int n from audit_logs where action='COST_CHANGE' and actor_id=$1", [ADMIN]))[0].n === 1);
+}
+
 console.log("\n== Управление пользователями ==");
 await as(ADMIN);
 await db.query("select admin_set_user_role($1,'manager',true)", [B]);

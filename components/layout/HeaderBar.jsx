@@ -121,10 +121,10 @@ export default function HeaderBar({ account }) {
                   <Link href="/orders" className={menuItem} onClick={() => setUserOpen(false)}><Package size={16} /> Мои заказы</Link>
                   <Link href="/favorites" className={menuItem} onClick={() => setUserOpen(false)}><Heart size={16} /> Избранное</Link>
                   {account.role === "admin" && (
-                    <Link href="/admin/dashboard" className={`${menuItem} font-semibold text-brand`} onClick={() => setUserOpen(false)}>Панель администратора</Link>
+                    <Link href="/admin" className={`${menuItem} font-semibold text-brand`} onClick={() => setUserOpen(false)}>Панель администратора</Link>
                   )}
                   {account.role === "manager" && (
-                    <Link href="/manager/dashboard" className={`${menuItem} font-semibold text-brand`} onClick={() => setUserOpen(false)}>Панель руководителя</Link>
+                    <Link href="/manager" className={`${menuItem} font-semibold text-brand`} onClick={() => setUserOpen(false)}>Панель руководителя</Link>
                   )}
                   <button onClick={signOut} className={`${menuItem} w-full text-rose-600`}><LogOut size={16} /> Выйти</button>
                 </div>
