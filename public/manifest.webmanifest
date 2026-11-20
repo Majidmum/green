@@ -1,0 +1,11 @@
+{
+  "name": "Green Garden",
+  "short_name": "Green Garden",
+  "description": "Свежие фрукты и овощи с доставкой по Душанбе",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F2",
+  "theme_color": "#123D2A",
+  "lang": "ru",
+  "icons": [{ "src": "/logo.png", "sizes": "640x640", "type": "image/png", "purpose": "any" }]
+}
