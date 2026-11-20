@@ -32,8 +32,8 @@ export default async function Footer() {
 
   return (
     <footer className="mt-24 bg-brand-dark text-white/80">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
-        <div>
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 px-4 py-10 sm:px-6 sm:py-14 sm:gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
+        <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold text-white">
             <Logo size={56} variant="light" />
             GREEN GARDEN
@@ -54,7 +54,7 @@ export default async function Footer() {
           </nav>
         ))}
 
-        <div>
+        <div className="col-span-2 lg:col-span-1">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Контакты</h2>
           <ul className="space-y-2.5 text-sm">
             {info.phone && <li className="flex gap-2"><Phone size={16} className="mt-0.5 shrink-0" /><a href={`tel:${info.phone}`} className="hover:text-white">{info.phone}</a></li>}

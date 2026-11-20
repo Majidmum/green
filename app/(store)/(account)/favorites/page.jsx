@@ -34,7 +34,7 @@ export default async function FavoritesPage() {
           <Link href="/catalog" className="btn-primary">Перейти в каталог</Link>
         </div>
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
           {products.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       )}

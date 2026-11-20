@@ -47,7 +47,7 @@ export default async function CatalogPage({ searchParams }) {
           </div>
 
           {items.length > 0 ? (
-            <div className={list ? "grid gap-4" : "grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 xl:grid-cols-3"}>
+            <div className={list ? "grid gap-4" : "grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3"}>
               {items.map((p, i) => (
                 <ProductCard key={p.id} product={p} layout={list ? "list" : "grid"} priority={i < 3} />
               ))}

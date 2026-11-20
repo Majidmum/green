@@ -57,7 +57,7 @@ export function ProductSection({ id, title, href, products }) {
     <section id={id} className={`${wrap} scroll-mt-24 pt-20`}>
       <Reveal>
         <SectionHeading title={title} href={href} />
-        <div className="grid grid-cols-1 gap-5 min-[480px]:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {products.slice(0, 8).map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
