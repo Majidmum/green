@@ -14,7 +14,7 @@ export default function Stars({ value = 0, count, size = 14 }) {
         ))}
       </span>
       {count !== undefined && (
-        <span className="text-xs text-brand-ink/60">
+        <span className={`text-xs text-brand-ink/60 ${count > 0 ? "" : "hidden sm:inline"}`}>
           {count > 0 ? `${v.toFixed(1)} (${count})` : "Нет отзывов"}
         </span>
       )}

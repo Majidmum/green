@@ -72,7 +72,7 @@ export default function ProductCard({ product, layout = "grid", priority = false
           </div>
           {soldOut && <span className="text-xs font-medium text-rose-600">Нет в наличии</span>}
         </div>
-        <AddToCartButton product={product} className={list ? "sm:max-w-[12rem]" : ""} />
+        <AddToCartButton product={product} className={`[&_button]:whitespace-nowrap [&_button]:px-3 [&_button]:py-2.5 [&_button]:text-sm sm:[&_button]:px-6 sm:[&_button]:py-3 ${list ? "sm:max-w-[12rem]" : ""}`} />
       </div>
     </article>
   );
