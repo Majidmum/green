@@ -30,8 +30,8 @@ export function Hero() {
             <Link href="/catalog" className="btn-primary !px-8 !py-4 text-base">
               Перейти в каталог <ArrowRight size={18} />
             </Link>
-            <Link href="#hits" className="btn-outline !px-8 !py-4 text-base">
-              Смотреть продукты
+            <Link href="/catalog?sale=1" className="btn-outline !px-8 !py-4 text-base">
+              Акции и скидки
             </Link>
           </div>
         </div>
