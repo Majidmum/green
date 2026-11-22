@@ -1,11 +1,11 @@
 import Link from "next/link";
 import {
-  ArrowRight, Banknote, Clock, Flame, Grid2x2, Leaf, Mail, MapPin, MessageCircle, MessagesSquare, Phone, ShieldCheck,
-  ShoppingBasket, Sparkles, Store, Truck, UserRound,
+  ArrowRight, Banknote, Clock, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Sparkles, Truck,
 } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import HeroVisual from "@/components/animations/HeroVisual";
 import ProductCard from "@/components/store/ProductCard";
+import ProductImage from "@/components/store/ProductImage";
 import CategoryIcon from "@/components/store/CategoryIcon";
 import ReviewCard from "@/components/store/ReviewCard";
 import { formatMoney } from "@/lib/utils/format";
@@ -227,19 +227,19 @@ export function DeliveryBlock({ zones }) {
 
 // ---- Блоки в стиле «компания и сервисы» ----
 
-const SERVICES = [
-  { Icon: ShoppingBasket, tag: "Онлайн-магазин", title: "Каталог товаров", text: "Фрукты, овощи, ягоды, зелень и орехи с актуальными ценами и остатками.", href: "/catalog" },
-  { Icon: Grid2x2, tag: "Каталог", title: "Категории", text: "Быстрый выбор по разделам: от цитрусовых до свежей зелени.", href: "/categories" },
-  { Icon: Flame, tag: "Акции", title: "Скидки и предложения", text: "Товары со скидкой и специальные предложения магазина.", href: "/catalog?sale=1" },
-  { Icon: Sparkles, tag: "Новое", title: "Новинки", text: "Свежие поступления и сезонные продукты, которые только что появились.", href: "/catalog?sort=new" },
-  { Icon: Truck, tag: "Доставка", title: "Доставка по Душанбе", text: "Курьер привезёт заказ по вашему адресу. Зоны и стоимость — в условиях доставки.", href: "/delivery" },
-  { Icon: Store, tag: "Самовывоз", title: "Заберите сами", text: "Оформите заказ онлайн и заберите его в удобное время.", href: "/delivery" },
-  { Icon: UserRound, tag: "Личный кабинет", title: "Заказы и адреса", text: "История заказов, статус в реальном времени, адреса и избранное.", href: "/profile" },
-  { Icon: MessagesSquare, tag: "Отзывы", title: "Мнение покупателей", text: "Читайте отзывы о товарах и делитесь своими с фотографиями.", href: "/reviews" },
-  { Icon: Leaf, tag: "О компании", title: "О Green Garden", text: "Кто мы, как отбираем продукцию и почему нам доверяют.", href: "/about" },
+// Запасной набор, если таблица home_services ещё не создана (миграция 7) или пуста
+const FALLBACK_SERVICES = [
+  { id: "f1", tag: "Онлайн-магазин", title: "Каталог товаров", description: "Фрукты, овощи, ягоды, зелень и орехи с актуальными ценами и остатками.", image_url: "/services/catalog.jpg", link_url: "/catalog" },
+  { id: "f2", tag: "Доставка", title: "Доставка по Душанбе", description: "Курьер привезёт заказ по вашему адресу. Зоны и стоимость — в условиях доставки.", image_url: "/services/delivery.jpg", link_url: "/delivery" },
+  { id: "f3", tag: "Самовывоз", title: "Заберите сами", description: "Оформите заказ онлайн и заберите его в удобное время.", image_url: "/services/pickup.jpg", link_url: "/delivery" },
+  { id: "f4", tag: "Акции", title: "Скидки и предложения", description: "Товары со скидкой и специальные предложения магазина.", image_url: "/services/promo.jpg", link_url: "/catalog?sale=1" },
+  { id: "f5", tag: "Личный кабинет", title: "Заказы и адреса", description: "История заказов, статус в реальном времени, адреса и избранное.", image_url: "/services/account.jpg", link_url: "/profile" },
+  { id: "f6", tag: "О компании", title: "О Green Garden", description: "Кто мы, как отбираем продукцию и почему нам доверяют.", image_url: "/services/about.jpg", link_url: "/about" },
 ];
 
-export function ServicesGrid() {
+// Карточки «фото + текст»; фото и тексты задаются в админке (Маркетинг → Блоки сервисов)
+export function ServicesGrid({ services }) {
+  const list = services?.length ? services : FALLBACK_SERVICES;
   return (
     <section className={`${wrap} pt-20`}>
       <Reveal>
@@ -247,22 +247,30 @@ export function ServicesGrid() {
           <h2 className="font-display text-3xl font-bold text-heading sm:text-4xl">Green Garden — все сервисы в одном месте</h2>
           <p className="mt-3 text-body/70">Магазин, доставка, самовывоз, акции и личный кабинет — выберите то, что нужно сегодня.</p>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
-          {SERVICES.map(({ Icon, tag, title, text, href }) => (
-            <Link key={title} href={href} className="card group flex flex-col p-4 transition hover:-translate-y-1 hover:shadow-lift sm:p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-brand sm:text-xs">{tag}</span>
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-tint text-brand transition group-hover:bg-brand group-hover:text-white">
-                  <Icon size={20} />
-                </span>
-              </div>
-              <h3 className="text-base font-semibold text-heading sm:text-lg">{title}</h3>
-              <p className="mt-2 hidden flex-1 text-sm sm:block leading-relaxed text-body/70">{text}</p>
-              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand sm:mt-4">
-                Подробнее <ArrowRight size={15} className="transition group-hover:translate-x-1" />
-              </span>
-            </Link>
-          ))}
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
+          {list.map((sv) => {
+            const inner = (
+              <>
+                <ProductImage src={sv.image_url} alt={sv.title} className="aspect-video w-full transition duration-500 group-hover:scale-[1.03]" sizes="(max-width: 1024px) 50vw, 33vw" />
+                <div className="flex flex-1 flex-col p-4 sm:p-6">
+                  {sv.tag && <span className="text-[10px] font-semibold uppercase tracking-wider text-brand sm:text-xs">{sv.tag}</span>}
+                  <h3 className="mt-1 text-base font-semibold text-heading sm:text-xl">{sv.title}</h3>
+                  {sv.description && <p className="mt-2 hidden flex-1 text-sm leading-relaxed text-body/70 sm:block">{sv.description}</p>}
+                  {sv.link_url && (
+                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand sm:mt-4">
+                      Подробнее <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+                    </span>
+                  )}
+                </div>
+              </>
+            );
+            const cls = "card group flex flex-col overflow-hidden transition hover:-translate-y-1 hover:shadow-lift";
+            return sv.link_url && sv.link_url.startsWith("/") ? (
+              <Link key={sv.id} href={sv.link_url} className={cls}>{inner}</Link>
+            ) : (
+              <div key={sv.id} className={cls}>{inner}</div>
+            );
+          })}
         </div>
       </Reveal>
     </section>
