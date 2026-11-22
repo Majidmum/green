@@ -12,7 +12,7 @@ export default async function HomePage() {
     <>
       <Hero />
       <BannerStrip banners={data.banners} />
-      <ServicesGrid />
+      <ServicesGrid services={data.services} />
       <CategoryGrid categories={data.categories} />
       <StatsBand products={data.productCount} categories={data.categories.filter((c) => !c.parent_id).length} zones={data.zones.length} />
       <PromotionsStrip promotions={data.promotions} />

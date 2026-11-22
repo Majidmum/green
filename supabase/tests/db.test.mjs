@@ -471,6 +471,17 @@ ok("клиент НЕ грузит фото товара", await fails("insert i
 await as(ADMIN);
 ok("админ грузит фото товара", (await db.query("insert into storage.objects (bucket_id, name) values ('product-images', 'a.jpg')")).affectedRows === 1);
 
+console.log("\n== Блоки сервисов главной ==");
 await sys();
+ok("стартовые блоки сервисов созданы", (await rows("select count(*)::int c from public.home_services"))[0].c === 6);
+await as(A);
+ok("клиент видит активные блоки", (await rows("select id from public.home_services")).length === 6);
+ok("клиент НЕ меняет блоки", await fails("update public.home_services set title = 'x'", [], "row-level security") || (await db.query("update public.home_services set title = 'x'")).affectedRows === 0);
+await as(ADMIN);
+ok("админ скрывает блок", (await db.query("update public.home_services set is_active = false where sort_order = 10")).affectedRows === 1);
+await as(A);
+ok("скрытый блок не виден клиенту", (await rows("select id from public.home_services")).length === 5);
+await sys();
+
 console.log(`\n=== ИТОГО: ${pass} успешно, ${fail} ошибок ===`);
 if (fail) { console.log(failures.join("\n")); process.exit(1); }
