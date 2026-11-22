@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
-  ArrowRight, Banknote, Clock, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Sparkles, Truck,
+  ArrowRight, Banknote, Clock, Grid2x2, Leaf, Mail, MapPin, MessageCircle, Phone, ShieldCheck, ShoppingBasket, Smile, Sparkles, Truck,
 } from "lucide-react";
+import CountUp from "@/components/animations/CountUp";
 import Reveal from "@/components/animations/Reveal";
 import HeroVisual from "@/components/animations/HeroVisual";
 import ProductCard from "@/components/store/ProductCard";
@@ -96,24 +98,88 @@ export function CategoryGrid({ categories }) {
   );
 }
 
+const PROMO_FALLBACK_PHOTOS = ["/home/peppers.jpg", "/home/citrus-apples.jpg", "/home/greens.jpg"];
+
+// Три горизонтальные промокарточки с фото: сначала реальные акции из админки, остальные места — быстрые ссылки
 export function PromotionsStrip({ promotions }) {
-  if (!promotions.length) return null;
+  const cards = promotions.slice(0, 3).map((p, i) => ({
+    key: p.id,
+    badge: `−${Number(p.discount_value)}${p.discount_type === "percent" ? "%" : " сом."}`,
+    title: p.name,
+    text: p.description,
+    href: "/catalog?sale=1",
+    cta: "Смотреть товары",
+    image: p.image_url || PROMO_FALLBACK_PHOTOS[i % PROMO_FALLBACK_PHOTOS.length],
+  }));
+  const extras = [
+    { key: "x-sale", badge: "%", title: "Товары со скидкой", text: "Все позиции с действующей скидкой в одном месте.", href: "/catalog?sale=1", cta: "К скидкам", image: "/home/citrus-apples.jpg" },
+    { key: "x-new", badge: "NEW", title: "Новинки", text: "Свежие поступления, которые только что появились.", href: "/catalog?sort=new", cta: "Смотреть новинки", image: "/home/fruit-bar.jpg" },
+    { key: "x-season", badge: "Сезон", title: "Сезонные продукты", text: "То, что вкуснее всего именно сейчас.", href: "/catalog?seasonal=1", cta: "Выбрать сезонное", image: "/home/tomatoes.jpg" },
+  ];
+  for (const e of extras) if (cards.length < 3) cards.push(e);
   return (
     <section className={`${wrap} pt-20`}>
       <Reveal>
         <SectionHeading title="Специальные предложения" href="/catalog?sale=1" />
-        <div className="grid gap-4 md:grid-cols-2">
-          {promotions.map((p) => (
-            <div key={p.id} className="flex items-center gap-5 rounded-xl2 bg-brand-dark p-6 text-white">
-              <span className="font-display text-4xl font-bold text-brand">
-                −{Number(p.discount_value)}{p.discount_type === "percent" ? "%" : " сом."}
-              </span>
-              <div>
-                <p className="text-lg font-semibold">{p.name}</p>
-                {p.description && <p className="mt-1 text-sm text-white/70">{p.description}</p>}
+        <div className="grid gap-4 lg:grid-cols-3">
+          {cards.map((c) => (
+            <Link key={c.key} href={c.href} className="group relative flex min-h-[200px] overflow-hidden rounded-2xl bg-brand-dark text-white shadow-soft transition hover:-translate-y-1 hover:shadow-lift sm:rounded-xl3">
+              <Image src={c.image} alt="" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover opacity-90 transition duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-brand-dark/10" />
+              <div className="relative flex w-3/4 flex-col justify-between p-5 sm:p-6">
+                <div>
+                  <span className="inline-block rounded-full bg-brand px-3 py-1 font-display text-lg font-bold">{c.badge}</span>
+                  <h3 className="mt-3 text-lg font-semibold sm:text-xl">{c.title}</h3>
+                  {c.text && <p className="mt-1 line-clamp-2 text-sm text-white/75">{c.text}</p>}
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand">
+                  {c.cta} <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+// Баннер «Вкус сезона»: крупные фото. Берём фото сезонных товаров из каталога, иначе — запасные снимки
+export function SeasonBanner({ products }) {
+  if (!products?.length) return null;
+  const own = (products || []).filter((p) => p.image_url).slice(0, 3).map((p) => ({ src: p.image_url, alt: p.name }));
+  const fallback = [
+    { src: "/home/citrus-apples.jpg", alt: "Апельсины и яблоки" },
+    { src: "/home/fruit-bar.jpg", alt: "Бананы и виноград" },
+    { src: "/home/tomatoes.jpg", alt: "Помидоры" },
+  ];
+  const photos = own.length >= 3 ? own : fallback;
+  return (
+    <section className={`${wrap} pt-20`}>
+      <Reveal>
+        <div className="relative overflow-hidden rounded-2xl bg-brand-dark text-white shadow-soft sm:rounded-xl3">
+          <div className="grid items-center gap-6 p-6 sm:p-10 lg:grid-cols-[1fr_1.25fr] lg:p-14">
+            <div className="relative z-10">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-brand">
+                <Leaf size={14} /> Сезонные продукты
+              </span>
+              <h2 className="mt-4 font-display text-4xl font-bold leading-tight sm:text-5xl">Вкус сезона</h2>
+              <p className="mt-4 max-w-md text-white/75">Свежие фрукты и овощи, которые вкуснее и выгоднее всего именно сейчас. Выбирайте самое спелое и сочное.</p>
+              <Link href="/catalog?seasonal=1" className="btn-primary mt-7 !px-8 !py-4 text-base">
+                Выбрать сезонное <ArrowRight size={18} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              {photos.map((ph, i) => (
+                <div
+                  key={ph.src}
+                  className={`relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lift sm:rounded-3xl ${i === 1 ? "mt-6 sm:mt-10" : i === 2 ? "mt-2 sm:mt-4" : ""}`}
+                >
+                  <Image src={ph.src} alt={ph.alt} fill sizes="(max-width: 1024px) 30vw, 20vw" className="object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Reveal>
     </section>
@@ -147,10 +213,10 @@ export function BannerStrip({ banners }) {
 }
 
 const BENEFITS = [
-  { Icon: ShieldCheck, title: "Высокое качество", text: "Отбираем свежие фрукты, овощи и зелень для вашего стола." },
+  { Icon: Leaf, title: "Свежесть каждый день", text: "Отбираем фрукты, овощи и зелень, чтобы на столе были только свежие продукты." },
+  { Icon: ShieldCheck, title: "Проверенное качество", text: "Контролируем качество и работаем с надёжными поставщиками." },
   { Icon: Truck, title: "Быстрая доставка", text: "Привозим заказы по Душанбе или готовим к самовывозу." },
   { Icon: Banknote, title: "Оплата при получении", text: "Платите наличными курьеру или при самовывозе." },
-  { Icon: Sparkles, title: "Удобный заказ", text: "Выбирайте товар по весу или поштучно и следите за статусом заказа." },
 ];
 
 export function Benefits() {
@@ -158,13 +224,14 @@ export function Benefits() {
     <section className={`${wrap} pt-20`}>
       <Reveal>
         <SectionHeading title="Почему Green Garden" />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {BENEFITS.map(({ Icon, title, text }) => (
-            <div key={title} className="card p-6">
-              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-tint text-brand">
-                <Icon size={24} />
+            <div key={title} className="card group relative overflow-hidden p-5 transition hover:-translate-y-1 hover:shadow-lift sm:p-7">
+              <span className="absolute inset-x-0 top-0 h-1 bg-brand/70" />
+              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-tint text-brand transition group-hover:bg-brand group-hover:text-white sm:h-14 sm:w-14">
+                <Icon size={26} />
               </span>
-              <h3 className="font-semibold text-body">{title}</h3>
+              <h3 className="text-base font-semibold text-heading sm:text-lg">{title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-body/70">{text}</p>
             </div>
           ))}
@@ -277,22 +344,78 @@ export function ServicesGrid({ services }) {
   );
 }
 
-// Цифры берутся из базы: число товаров, категорий и зон доставки
-export function StatsBand({ products, categories, zones }) {
+const STEPS = [
+  { n: "01", title: "Выберите продукты", text: "Найдите любимые фрукты и овощи в нашем каталоге и добавьте их в корзину.", image: "/steps/step-1.jpg" },
+  { n: "02", title: "Оформите заказ", text: "Укажите адрес, выберите удобный способ получения и подтвердите заказ.", image: "/steps/step-2.jpg" },
+  { n: "03", title: "Получите свежесть", text: "Получите заказ с доставкой или заберите самостоятельно в магазине.", image: "/steps/step-3.jpg" },
+];
+
+// «3 шага»: фото не изменяются, текст и затемнение делаются стилями поверх снимка
+export function HowItWorks() {
+  return (
+    <section className={`${wrap} pt-20`}>
+      <Reveal>
+        <div className="grid items-center gap-8 lg:grid-cols-[0.75fr_1.75fr] lg:gap-12">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full bg-tint px-3 py-1 text-sm font-medium text-brand">
+              <Sparkles size={14} /> Как это работает
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-heading sm:text-4xl lg:text-[2.6rem]">
+              Ваши любимые продукты — всего за 3 шага
+            </h2>
+            <p className="mt-4 text-body/70">
+              Выберите товары в каталоге, оформите заказ и получите свежие фрукты и овощи с доставкой или самовывозом.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
+            {STEPS.map((st) => (
+              <div key={st.n} className="card overflow-hidden p-2 transition hover:-translate-y-1 hover:shadow-lift">
+                <div className="relative aspect-[5/4] overflow-hidden rounded-2xl sm:aspect-[4/5]">
+                  <Image src={st.image} alt={st.title} fill sizes="(max-width: 640px) 100vw, 30vw" className="object-cover" />
+                  <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
+                    <span className="font-display text-lg font-bold text-brand">{st.n}</span>
+                    <h3 className="mt-1 text-xl font-bold leading-tight">{st.title}</h3>
+                    <p className="mt-2 text-sm leading-snug text-white/85">{st.text}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-8 flex justify-center">
+          <Link href="/catalog" className="btn-primary !px-10 !py-4 text-base">
+            Перейти в каталог <ArrowRight size={18} />
+          </Link>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+// Цифры берутся из базы (функция public_stats): товары, категории, зоны доставки, клиенты с доставленными заказами
+export function StatsBand({ stats }) {
   const items = [
-    { value: products, label: "товаров в каталоге" },
-    { value: categories, label: "категорий" },
-    { value: zones, label: "зон доставки" },
+    { Icon: ShoppingBasket, value: Number(stats?.products ?? 0), label: "товаров в каталоге" },
+    { Icon: Grid2x2, value: Number(stats?.categories ?? 0), label: "категорий" },
+    { Icon: MapPin, value: Number(stats?.zones ?? 0), label: "зон доставки" },
+    { Icon: Smile, value: Number(stats?.customers ?? 0), label: "довольных клиентов" },
   ].filter((i) => i.value > 0);
   if (!items.length) return null;
   return (
     <section className={`${wrap} pt-20`}>
       <Reveal>
-        <div className="grid gap-6 rounded-xl3 bg-brand-dark p-8 text-white sm:grid-cols-3 md:p-12">
-          {items.map((i) => (
-            <div key={i.label} className="text-center sm:text-left">
-              <p className="font-display text-5xl font-bold text-brand sm:text-6xl">{i.value}</p>
-              <p className="mt-2 text-white/80">{i.label}</p>
+        <div className={`grid grid-cols-2 gap-3 sm:gap-5 ${items.length >= 4 ? "lg:grid-cols-4" : ""}`}>
+          {items.map(({ Icon, value, label }) => (
+            <div key={label} className="relative overflow-hidden rounded-2xl bg-brand-dark p-5 text-white shadow-soft sm:rounded-xl3 sm:p-7">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-brand sm:h-12 sm:w-12">
+                <Icon size={22} />
+              </span>
+              <p className="mt-5 font-display text-4xl font-bold leading-none text-white sm:text-5xl">
+                <CountUp value={value} />
+              </p>
+              <p className="mt-2 text-sm text-white/75 sm:text-base">{label}</p>
+              <Icon aria-hidden="true" className="pointer-events-none absolute -bottom-4 -right-3 h-24 w-24 text-white/[0.04]" strokeWidth={1.2} />
             </div>
           ))}
         </div>

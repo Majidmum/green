@@ -72,7 +72,7 @@ export default function CatalogFilters({ tree, params }) {
   const link = (overrides) => `/catalog${buildCatalogQuery(params, { page: 1, ...overrides })}`;
   const hasFilters =
     params.q || params.category || params.min !== null || params.max !== null ||
-    params.stock || params.sale || params.popular;
+    params.stock || params.sale || params.popular || params.seasonal;
 
   const catLink = (c, nested) => (
     <Link
@@ -153,6 +153,7 @@ export default function CatalogFilters({ tree, params }) {
             ["stock", "Только в наличии"],
             ["sale", "Со скидкой"],
             ["popular", "Популярные"],
+            ["seasonal", "Сезонные"],
           ].map(([key, label]) => (
             <label key={key} className="flex cursor-pointer items-center gap-3 text-sm">
               <input

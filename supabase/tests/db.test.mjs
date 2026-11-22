@@ -483,5 +483,16 @@ await as(A);
 ok("скрытый блок не виден клиенту", (await rows("select id from public.home_services")).length === 5);
 await sys();
 
+console.log("\n== Публичная статистика главной ==");
+await as(A);
+{
+  const st = (await rows("select public.public_stats() as s"))[0].s;
+  ok("public_stats возвращает 4 числа", ["products", "categories", "zones", "customers"].every((k) => typeof st[k] === "number"));
+  const real = (await rows("select count(distinct user_id)::int c from public.orders where status = 'delivered'"))[0].c;
+  ok("клиенты считаются по доставленным заказам", st.customers === real, `${st.customers} vs ${real}`);
+}
+await sys();
+ok("у акции есть поле image_url", (await rows("select 1 from information_schema.columns where table_name='promotions' and column_name='image_url'")).length === 1);
+
 console.log(`\n=== ИТОГО: ${pass} успешно, ${fail} ошибок ===`);
 if (fail) { console.log(failures.join("\n")); process.exit(1); }
