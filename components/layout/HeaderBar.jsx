@@ -15,7 +15,6 @@ const NAV = [
   { href: "/categories", label: "Категории" },
   { href: "/catalog?sale=1", label: "Акции" },
   { href: "/about", label: "О нас" },
-  { href: "/delivery", label: "Доставка" },
   { href: "/contacts", label: "Контакты" },
 ];
 

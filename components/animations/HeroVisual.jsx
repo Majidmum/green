@@ -11,9 +11,9 @@ const TILES = [
   { Icon: Cherry, className: "left-[42%] top-[80%] h-12 w-12 bg-surface text-rose-600 sm:h-20 sm:w-20", anim: "animate-float" },
 ];
 
-export default function HeroVisual() {
+export default function HeroVisual({ className = "" }) {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[300px] sm:max-w-[520px]" aria-hidden="true">
+    <div className={`relative mx-auto aspect-square w-full max-w-[300px] sm:max-w-[520px] ${className}`} aria-hidden="true">
       <div className="absolute inset-[6%] rounded-full bg-gradient-to-br from-brand/90 to-brand-dark shadow-lift" />
       <div className="absolute inset-[18%] rounded-full border border-white/20" />
       <div className="absolute left-1/2 top-1/2 flex h-[46%] w-[46%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#FAF8F2] shadow-lift">

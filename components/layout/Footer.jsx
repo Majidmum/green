@@ -7,7 +7,6 @@ import { getSetting } from "@/lib/data/catalog";
 const LINKS = {
   "Покупателям": [
     ["/catalog", "Каталог"],
-    ["/delivery", "Доставка и оплата"],
     ["/faq", "Вопросы и ответы"],
     ["/reviews", "Отзывы"],
   ],

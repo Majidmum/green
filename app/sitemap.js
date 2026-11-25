@@ -4,7 +4,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const dynamic = "force-dynamic";
 
-const STATIC = ["", "/catalog", "/categories", "/reviews", "/about", "/contacts", "/faq", "/delivery", "/offer", "/privacy-policy", "/terms"];
+const STATIC = ["", "/catalog", "/categories", "/reviews", "/about", "/contacts", "/faq", "/offer", "/privacy-policy", "/terms"];
 
 export default async function sitemap() {
   const entries = STATIC.map((path) => ({ url: `${siteUrl}${path}`, changeFrequency: "weekly" }));

@@ -10,9 +10,30 @@ import ProductCard from "@/components/store/ProductCard";
 import ProductImage from "@/components/store/ProductImage";
 import CategoryIcon from "@/components/store/CategoryIcon";
 import ReviewCard from "@/components/store/ReviewCard";
-import { formatMoney } from "@/lib/utils/format";
 
 const wrap = "mx-auto max-w-7xl px-4 sm:px-6";
+
+// Для телефонов: вместо плавающих иконок — мозаика из фото и круглый логотип
+function HeroCollage() {
+  return (
+    <div className="relative sm:hidden">
+      <div className="grid h-72 grid-cols-2 grid-rows-2 gap-3">
+        <div className="relative row-span-2 overflow-hidden rounded-3xl shadow-lift">
+          <Image src="/home/peppers.jpg" alt="" fill priority sizes="50vw" className="object-cover" />
+        </div>
+        <div className="relative overflow-hidden rounded-3xl shadow-lift">
+          <Image src="/home/citrus-apples.jpg" alt="" fill priority sizes="50vw" className="object-cover" />
+        </div>
+        <div className="relative overflow-hidden rounded-3xl shadow-lift">
+          <Image src="/home/tomatoes.jpg" alt="" fill priority sizes="50vw" className="object-cover" />
+        </div>
+      </div>
+      <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#FAF8F2] shadow-lift ring-4 ring-surface">
+        <Image src="/logo.png" alt="Green Garden" width={96} height={96} className="h-[86%] w-[86%]" />
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   return (
@@ -20,13 +41,13 @@ export function Hero() {
       <div className={`${wrap} grid items-center gap-10 py-12 lg:grid-cols-2 lg:py-20`}>
         <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-sm font-medium text-brand shadow-soft">
-            <Sparkles size={15} /> Доставка по Душанбе
+            <Sparkles size={15} /> Свежие фрукты и овощи в Душанбе
           </p>
           <h1 className="font-display text-5xl font-bold leading-[1.05] text-heading sm:text-6xl lg:text-7xl">
             GREEN GARDEN
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-body/75">
-            Свежие фрукты, овощи, ягоды и зелень. Выбирайте онлайн — мы привезём к вам домой или подготовим к самовывозу.
+            Свежие фрукты, овощи, ягоды и зелень. Выбирайте онлайн — только отборные продукты на вашем столе каждый день.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/catalog" className="btn-primary !px-8 !py-4 text-base">
@@ -37,7 +58,8 @@ export function Hero() {
             </Link>
           </div>
         </div>
-        <HeroVisual />
+        <HeroVisual className="hidden sm:block" />
+        <HeroCollage />
       </div>
     </section>
   );
@@ -144,21 +166,19 @@ export function PromotionsStrip({ promotions }) {
   );
 }
 
-// Баннер «Вкус сезона»: крупные фото. Берём фото сезонных товаров из каталога, иначе — запасные снимки
+// Баннер «Вкус сезона»: три крупных фото (public/season/)
 export function SeasonBanner({ products }) {
   if (!products?.length) return null;
-  const own = (products || []).filter((p) => p.image_url).slice(0, 3).map((p) => ({ src: p.image_url, alt: p.name }));
-  const fallback = [
-    { src: "/home/citrus-apples.jpg", alt: "Апельсины и яблоки" },
-    { src: "/home/fruit-bar.jpg", alt: "Бананы и виноград" },
-    { src: "/home/tomatoes.jpg", alt: "Помидоры" },
+  const photos = [
+    { src: "/season/pomegranate.jpg", alt: "Спелый гранат" },
+    { src: "/season/pineapple.jpg", alt: "Ананас" },
+    { src: "/season/citrus.jpg", alt: "Апельсины и мандарины" },
   ];
-  const photos = own.length >= 3 ? own : fallback;
   return (
     <section className={`${wrap} pt-20`}>
       <Reveal>
         <div className="relative overflow-hidden rounded-2xl bg-brand-dark text-white shadow-soft sm:rounded-xl3">
-          <div className="grid items-center gap-6 p-6 sm:p-10 lg:grid-cols-[1fr_1.25fr] lg:p-14">
+          <div className="grid items-center gap-6 p-6 sm:p-10 lg:grid-cols-[0.8fr_1.5fr] lg:p-10">
             <div className="relative z-10">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm text-brand">
                 <Leaf size={14} /> Сезонные продукты
@@ -257,48 +277,9 @@ export function ReviewsSection({ reviews }) {
   );
 }
 
-export function DeliveryBlock({ zones }) {
-  return (
-    <section className={`${wrap} pt-20`}>
-      <Reveal>
-        <div className="grid gap-8 rounded-xl3 bg-brand-dark p-8 text-white md:grid-cols-[1fr_1.2fr] md:p-12">
-          <div>
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">Доставка и оплата</h2>
-            <p className="mt-4 text-white/75">
-              Выберите доставку курьером или самовывоз при оформлении заказа. Оплата — наличными при получении.
-            </p>
-            <Link href="/delivery" className="btn mt-6 bg-brand text-white hover:bg-brand/90">
-              Подробные условия <ArrowRight size={16} />
-            </Link>
-          </div>
-          {zones.length > 0 && (
-            <ul className="divide-y divide-white/10 rounded-xl2 bg-white/5">
-              {zones.map((z) => (
-                <li key={z.id} className="flex flex-wrap items-center justify-between gap-2 px-5 py-4">
-                  <span className="font-semibold">{z.name}</span>
-                  <span className="text-sm text-white/75">
-                    {Number(z.delivery_fee) > 0 ? formatMoney(z.delivery_fee) : "бесплатно"}
-                    {z.free_delivery_from && Number(z.delivery_fee) > 0
-                      ? `, бесплатно от ${formatMoney(z.free_delivery_from)}`
-                      : ""}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </Reveal>
-    </section>
-  );
-}
-
-// ---- Блоки в стиле «компания и сервисы» ----
-
 // Запасной набор, если таблица home_services ещё не создана (миграция 7) или пуста
 const FALLBACK_SERVICES = [
   { id: "f1", tag: "Онлайн-магазин", title: "Каталог товаров", description: "Фрукты, овощи, ягоды, зелень и орехи с актуальными ценами и остатками.", image_url: "/services/catalog.jpg", link_url: "/catalog" },
-  { id: "f2", tag: "Доставка", title: "Доставка по Душанбе", description: "Курьер привезёт заказ по вашему адресу. Зоны и стоимость — в условиях доставки.", image_url: "/services/delivery.jpg", link_url: "/delivery" },
-  { id: "f3", tag: "Самовывоз", title: "Заберите сами", description: "Оформите заказ онлайн и заберите его в удобное время.", image_url: "/services/pickup.jpg", link_url: "/delivery" },
   { id: "f4", tag: "Акции", title: "Скидки и предложения", description: "Товары со скидкой и специальные предложения магазина.", image_url: "/services/promo.jpg", link_url: "/catalog?sale=1" },
   { id: "f5", tag: "Личный кабинет", title: "Заказы и адреса", description: "История заказов, статус в реальном времени, адреса и избранное.", image_url: "/services/account.jpg", link_url: "/profile" },
   { id: "f6", tag: "О компании", title: "О Green Garden", description: "Кто мы, как отбираем продукцию и почему нам доверяют.", image_url: "/services/about.jpg", link_url: "/about" },
@@ -306,7 +287,7 @@ const FALLBACK_SERVICES = [
 
 // Карточки «фото + текст»; фото и тексты задаются в админке (Маркетинг → Блоки сервисов)
 export function ServicesGrid({ services }) {
-  const list = services?.length ? services : FALLBACK_SERVICES;
+  const list = (services?.length ? services : FALLBACK_SERVICES).filter((sv) => sv.link_url !== "/delivery");
   return (
     <section className={`${wrap} pt-20`}>
       <Reveal>
@@ -398,14 +379,13 @@ export function StatsBand({ stats }) {
   const items = [
     { Icon: ShoppingBasket, value: Number(stats?.products ?? 0), label: "товаров в каталоге" },
     { Icon: Grid2x2, value: Number(stats?.categories ?? 0), label: "категорий" },
-    { Icon: MapPin, value: Number(stats?.zones ?? 0), label: "зон доставки" },
     { Icon: Smile, value: Number(stats?.customers ?? 0), label: "довольных клиентов" },
   ].filter((i) => i.value > 0);
   if (!items.length) return null;
   return (
     <section className={`${wrap} pt-20`}>
       <Reveal>
-        <div className={`grid grid-cols-2 gap-3 sm:gap-5 ${items.length >= 4 ? "lg:grid-cols-4" : ""}`}>
+        <div className={`grid grid-cols-2 gap-3 sm:gap-5 ${items.length >= 4 ? "lg:grid-cols-4" : items.length === 3 ? "sm:grid-cols-3" : ""}`}>
           {items.map(({ Icon, value, label }) => (
             <div key={label} className="relative overflow-hidden rounded-2xl bg-brand-dark p-5 text-white shadow-soft sm:rounded-xl3 sm:p-7">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-brand sm:h-12 sm:w-12">

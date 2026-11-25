@@ -31,7 +31,7 @@ export default function FaqPage() {
             <p className="mt-3 leading-relaxed text-body/75">
               {a ?? (
                 <>
-                  Стоимость и зоны доставки указаны на странице <Link href="/delivery" className="text-brand underline">«Доставка и оплата»</Link>.
+                  Условия и стоимость показываются при оформлении заказа.
                 </>
               )}
             </p>
