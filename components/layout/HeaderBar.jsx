@@ -57,12 +57,12 @@ export default function HeaderBar({ account }) {
   }
 
   const iconBtn =
-    "relative flex h-11 w-11 items-center justify-center rounded-full text-heading transition hover:bg-tint";
+    "relative flex h-10 w-10 items-center justify-center rounded-full text-heading transition hover:bg-tint sm:h-11 sm:w-11";
   const menuItem = "flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-tint";
 
   return (
     <header className="glass sticky top-0 z-40 border-x-0 border-t-0 border-b-heading/10">
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
         <button className={`${iconBtn} lg:hidden`} onClick={() => setMenuOpen((v) => !v)} aria-label="Меню" aria-expanded={menuOpen}>
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -133,24 +133,32 @@ export default function HeaderBar({ account }) {
               )}
             </div>
           ) : (
-            <Link href="/login" className="btn-primary ml-1 !px-5 !py-2.5">Войти</Link>
+            <Link href="/login" className="btn-primary ml-0.5 !px-4 !py-2.5 sm:ml-1 sm:!px-5">Войти</Link>
           )}
         </div>
       </div>
 
       {menuOpen && (
-        <div className="border-t border-heading/10 bg-page px-4 pb-4 pt-3 lg:hidden">
-          <form onSubmit={onSearch} className="mb-3" role="search">
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Найти товар" maxLength={80} className="input" aria-label="Поиск товаров" />
-          </form>
-          <nav className="grid gap-1" aria-label="Мобильная навигация">
-            {NAV.map((n) => (
-              <Link key={n.href} href={n.href} onClick={() => setMenuOpen(false)} className="rounded-xl px-4 py-3 text-base font-medium hover:bg-tint">
-                {n.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
+        <>
+          <button
+            type="button"
+            aria-label="Закрыть меню"
+            onClick={() => setMenuOpen(false)}
+            className="absolute left-0 right-0 top-full h-[100dvh] cursor-default bg-black/40 lg:hidden"
+          />
+          <div className="absolute left-0 right-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-heading/10 bg-page px-4 pb-4 pt-3 shadow-lg lg:hidden">
+            <form onSubmit={onSearch} className="mb-3" role="search">
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Найти товар" maxLength={80} className="input" aria-label="Поиск товаров" />
+            </form>
+            <nav className="grid gap-1" aria-label="Мобильная навигация">
+              {NAV.map((n) => (
+                <Link key={n.href} href={n.href} onClick={() => setMenuOpen(false)} className="rounded-xl px-4 py-3 text-base font-medium hover:bg-tint">
+                  {n.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );

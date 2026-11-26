@@ -17,13 +17,13 @@ function useNavigate(params) {
 export function SortSelect({ params }) {
   const { go, pending } = useNavigate(params);
   return (
-    <label className="flex items-center gap-2 text-sm">
-      <span className="text-body/60">Сортировка:</span>
+    <label className="flex min-w-0 items-center gap-2 text-sm">
+      <span className="hidden text-body/60 min-[430px]:inline">Сортировка:</span>
       <select
         value={params.sort}
         onChange={(e) => go({ sort: e.target.value })}
         disabled={pending}
-        className="input !w-auto !py-2"
+        className="input !w-auto min-w-0 max-w-full !py-2"
       >
         {SORTS.map((s) => (
           <option key={s.value} value={s.value}>{s.label}</option>

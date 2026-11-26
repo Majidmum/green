@@ -48,9 +48,11 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
+  overflow-x: clip;
   background: rgb(var(--page));
   color: rgb(var(--body));
 }

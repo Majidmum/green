@@ -67,8 +67,8 @@ export function Hero() {
 
 export function SectionHeading({ title, href, linkLabel = "Смотреть все" }) {
   return (
-    <div className="mb-8 flex items-end justify-between gap-4">
-      <h2 className="font-display text-3xl font-bold text-heading sm:text-4xl">{title}</h2>
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-x-4 gap-y-2 sm:mb-8">
+      <h2 className="min-w-0 font-display text-2xl font-bold text-heading sm:text-4xl">{title}</h2>
       {href && (
         <Link href={href} className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-brand hover:underline">
           {linkLabel} <ArrowRight size={16} />

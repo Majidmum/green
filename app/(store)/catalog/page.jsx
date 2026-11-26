@@ -32,15 +32,15 @@ export default async function CatalogPage({ searchParams }) {
       <h1 className="font-display text-4xl font-bold text-heading">{title}</h1>
       {current?.description && <p className="mt-2 text-body/70">{current.description}</p>}
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[17rem_1fr]">
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[17rem_minmax(0,1fr)]">
         <CatalogFilters tree={tree} params={params} />
 
-        <section aria-label="Товары">
+        <section aria-label="Товары" className="min-w-0">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm text-body/60" aria-live="polite">
               {total} {plural(total, ["товар", "товара", "товаров"])}
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex min-w-0 max-w-full items-center gap-3">
               <SortSelect params={params} />
               <ViewToggle params={params} />
             </div>
