@@ -40,7 +40,7 @@ export default function PasswordForm() {
           {msg.text}
         </p>
       )}
-      <button className="btn-outline" disabled={isSubmitting}>{isSubmitting ? "Сохраняем…" : "Изменить пароль"}</button>
+      <button className="btn-outline w-full sm:w-auto" disabled={isSubmitting}>{isSubmitting ? "Сохраняем…" : "Изменить пароль"}</button>
     </form>
   );
 }

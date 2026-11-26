@@ -22,7 +22,7 @@ export default async function MyReviewsPage() {
 
   return (
     <div>
-      <h1 className="mb-2 font-display text-4xl font-bold text-heading">Мои отзывы</h1>
+      <h1 className="mb-2 font-display text-3xl font-bold text-heading sm:text-4xl">Мои отзывы</h1>
       <p className="mb-6 text-sm text-body/60">Отзыв можно оставить на товар из доставленного заказа — откройте заказ и нажмите «Оставить отзыв».</p>
       {!reviews?.length ? (
         <div className="card flex flex-col items-center gap-3 p-12 text-center">

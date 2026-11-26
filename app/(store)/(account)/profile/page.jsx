@@ -9,8 +9,8 @@ export const metadata = { title: "Профиль", robots: { index: false } };
 
 function Section({ title, children }) {
   return (
-    <section className="card p-6">
-      <h2 className="mb-4 font-display text-xl font-bold text-heading">{title}</h2>
+    <section className="card p-4 sm:p-6">
+      <h2 className="mb-4 font-display text-lg font-bold text-heading sm:text-xl">{title}</h2>
       {children}
     </section>
   );
@@ -31,8 +31,8 @@ export default async function ProfilePage() {
   if (e1 || e2) throw new Error(`Supabase: ${(e1 || e2).message}`);
 
   return (
-    <div className="space-y-6">
-      <h1 className="font-display text-4xl font-bold text-heading">Профиль</h1>
+    <div className="min-w-0 space-y-4 sm:space-y-6">
+      <h1 className="font-display text-3xl font-bold sm:text-4xl text-heading">Профиль</h1>
       <Section title="Личные данные">
         <ProfileForm initial={{ full_name: profile?.full_name ?? "", phone: profile?.phone ?? "" }} email={profile?.email ?? user.email} />
       </Section>

@@ -39,7 +39,7 @@ export default async function OrdersPage({ searchParams }) {
 
   return (
     <div>
-      <h1 className="mb-6 font-display text-4xl font-bold text-heading">Мои заказы</h1>
+      <h1 className="mb-6 font-display text-3xl font-bold text-heading sm:text-4xl">Мои заказы</h1>
       <div className="mb-5 flex flex-wrap gap-2">
         {TABS.map((t) => (
           <Link key={t.key} href={t.key ? `/orders?status=${t.key}` : "/orders"} aria-current={tab === t.key ? "page" : undefined}

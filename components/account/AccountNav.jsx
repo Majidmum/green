@@ -14,7 +14,7 @@ const ITEMS = [
 export default function AccountNav() {
   const path = usePathname();
   return (
-    <nav aria-label="Личный кабинет" className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible">
+    <nav aria-label="Личный кабинет" className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap lg:flex-col">
       {ITEMS.map(({ href, label, Icon }) => {
         const active = path === href || path.startsWith(href + "/");
         return (
@@ -22,7 +22,7 @@ export default function AccountNav() {
             key={href}
             href={href}
             aria-current={active ? "page" : undefined}
-            className={`flex shrink-0 items-center gap-2.5 rounded-full px-4 py-2.5 text-sm font-medium transition lg:rounded-xl ${
+            className={`flex min-w-0 items-center justify-center gap-2 rounded-full px-3 py-2.5 text-sm sm:justify-start sm:px-4 lg:gap-2.5 font-medium transition lg:rounded-xl ${
               active ? "bg-brand text-white shadow-soft" : "bg-surface text-body/80 shadow-soft hover:bg-tint"
             }`}
           >

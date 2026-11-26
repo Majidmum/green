@@ -26,7 +26,7 @@ export default async function FavoritesPage() {
 
   return (
     <div>
-      <h1 className="mb-6 font-display text-4xl font-bold text-heading">Избранное</h1>
+      <h1 className="mb-6 font-display text-3xl font-bold text-heading sm:text-4xl">Избранное</h1>
       {products.length === 0 ? (
         <div className="card flex flex-col items-center gap-3 p-12 text-center">
           <Heart size={40} className="text-brand/50" />

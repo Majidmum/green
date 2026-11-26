@@ -29,7 +29,7 @@ function AddressForm({ initial, onDone }) {
     });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4 rounded-2xl border border-heading/10 bg-page/50 p-4" noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4 rounded-2xl border border-heading/10 bg-page/50 p-3 sm:p-4" noValidate>
       <div className="grid gap-4 sm:grid-cols-3">
         <FormField id="ad-label" label="Название" error={errors.label?.message}>
           <input id="ad-label" className="input" {...register("label")} />
@@ -41,7 +41,7 @@ function AddressForm({ initial, onDone }) {
           <input id="ad-street" className="input" {...register("street")} />
         </FormField>
       </div>
-      <div className="grid gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         <FormField id="ad-house" label="Дом"><input id="ad-house" className="input" {...register("house")} /></FormField>
         <FormField id="ad-apt" label="Квартира"><input id="ad-apt" className="input" {...register("apartment")} /></FormField>
         <FormField id="ad-ent" label="Подъезд"><input id="ad-ent" className="input" {...register("entrance")} /></FormField>
@@ -52,7 +52,7 @@ function AddressForm({ initial, onDone }) {
         <input type="checkbox" className="h-4 w-4 accent-brand" {...register("is_default")} /> Основной адрес
       </label>
       {error && <p className="text-sm text-rose-600" role="alert">{error}</p>}
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <button className="btn-primary !py-2.5" disabled={pending}>{pending ? "Сохраняем…" : "Сохранить адрес"}</button>
         <button type="button" className="btn-outline !py-2.5" onClick={onDone}>Отмена</button>
       </div>
@@ -77,7 +77,7 @@ export default function AddressManager({ addresses }) {
       {addresses.length === 0 && editing !== "new" && (
         <p className="text-sm text-body/60">Сохранённых адресов пока нет.</p>
       )}
-      <ul className="grid gap-3 sm:grid-cols-2">
+      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {addresses.map((a) => (
           <li key={a.id} className="rounded-2xl border border-heading/10 bg-surface p-4">
             <div className="flex items-start justify-between gap-2">
@@ -113,7 +113,7 @@ export default function AddressManager({ addresses }) {
           onDone={() => setEditing(null)}
         />
       ) : (
-        <button className="btn-outline mt-4 !py-2.5" onClick={() => setEditing("new")}><Plus size={16} /> Добавить адрес</button>
+        <button className="btn-outline mt-4 w-full !py-2.5 sm:w-auto" onClick={() => setEditing("new")}><Plus size={16} /> Добавить адрес</button>
       )}
     </div>
   );

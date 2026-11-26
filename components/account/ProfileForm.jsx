@@ -41,7 +41,7 @@ export default function ProfileForm({ initial, email }) {
           {msg.text}
         </p>
       )}
-      <button className="btn-primary" disabled={pending}>{pending ? "Сохраняем…" : "Сохранить"}</button>
+      <button className="btn-primary w-full sm:w-auto" disabled={pending}>{pending ? "Сохраняем…" : "Сохранить"}</button>
     </form>
   );
 }
