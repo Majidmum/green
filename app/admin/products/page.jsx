@@ -55,7 +55,7 @@ export default async function AdminProductsPage({ searchParams }) {
       </form>
 
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[720px] text-left text-sm">
+        <table className="rt w-full min-w-[720px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
             <tr><th className="px-4 py-3">Товар</th><th className="px-4 py-3">Категория</th><th className="px-4 py-3">Цена</th><th className="px-4 py-3">Остаток</th><th className="px-4 py-3">Статус</th></tr>
           </thead>

@@ -50,10 +50,10 @@ export default async function AuditLog({ searchParams, basePath }) {
         <select name="action" defaultValue={action} className="input" aria-label="Действие"><option value="">Все действия</option>{Object.entries(ACTIONS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select>
         <input type="date" name="from" defaultValue={from} className="input" aria-label="С даты" />
         <input type="date" name="to" defaultValue={to} className="input" aria-label="По дату" />
-        <div className="flex gap-2"><button className="btn-primary !py-2.5">Применить</button><Link href={basePath} className="btn-outline !py-2.5">Сбросить</Link></div>
+        <div className="flex flex-wrap gap-2"><button className="btn-primary !py-2.5">Применить</button><Link href={basePath} className="btn-outline !py-2.5">Сбросить</Link></div>
       </form>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[820px] text-left text-sm">
+        <table className="rt w-full min-w-[820px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Когда</th><th className="px-4 py-3">Кто</th><th className="px-4 py-3">Раздел</th><th className="px-4 py-3">Действие</th><th className="px-4 py-3">Что изменилось</th></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {!data?.length && <tr><td colSpan={5} className="px-4 py-10 text-center text-body/50">Записей нет</td></tr>}

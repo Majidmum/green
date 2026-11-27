@@ -12,7 +12,7 @@ const T = ({ title, head, rows, empty }) => (
   <section className="break-inside-avoid">
     <h2 className="mb-2 mt-6 font-display text-xl font-bold text-heading">{title}</h2>
     <div className="card overflow-x-auto print:shadow-none">
-      <table className="w-full text-left text-sm">
+      <table className="rt w-full text-left text-sm">
         <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr>{head.map((h, i) => <th key={h} className={`px-4 py-2.5 ${i ? "text-right" : ""}`}>{h}</th>)}</tr></thead>
         <tbody className="divide-y divide-heading/5">
           {rows.length === 0 && <tr><td colSpan={head.length} className="px-4 py-6 text-center text-body/50">{empty}</td></tr>}

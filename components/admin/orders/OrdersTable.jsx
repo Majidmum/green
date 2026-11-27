@@ -40,7 +40,7 @@ async function fetchOrders(supabase, p) {
 function View({ rows, base }) {
   return (
     <div className="card overflow-x-auto">
-      <table className="w-full min-w-[760px] text-left text-sm">
+      <table className="rt w-full min-w-[760px] text-left text-sm">
         <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
           <tr>
             <th className="px-4 py-3">Заказ</th><th className="px-4 py-3">Клиент</th><th className="px-4 py-3">Статус</th>

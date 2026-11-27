@@ -20,9 +20,9 @@ export default function Modal({ title, onClose, children, wide = false }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 p-4 sm:items-center" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={title} className={`card my-6 w-full ${wide ? "max-w-3xl" : "max-w-xl"} p-6 outline-none`}>
+      <div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={title} className={`card my-4 w-full ${wide ? "max-w-3xl" : "max-w-xl"} p-4 outline-none sm:my-6 sm:p-6`}>
         <div className="mb-5 flex items-center justify-between gap-4">
-          <h2 className="font-display text-2xl font-bold text-heading">{title}</h2>
+          <h2 className="font-display text-xl font-bold text-heading sm:text-2xl">{title}</h2>
           <button onClick={onClose} aria-label="Закрыть" className="rounded-full p-2 hover:bg-tint"><X size={18} /></button>
         </div>
         {children}

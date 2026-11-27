@@ -69,7 +69,7 @@ export default function ProductForm({ product, categories, cost }) {
   const unit = UNITS;
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
-      <div className="card grid gap-4 p-5 sm:grid-cols-2">
+      <div className="card grid gap-4 p-4 sm:p-5 sm:grid-cols-2">
         <F id="p-name" label="Название *" error={errors.name?.message}><input id="p-name" className="input" {...register("name")} /></F>
         <F id="p-slug" label="Адрес (slug) *" error={errors.slug?.message} hint="Часть ссылки на товар">
           <div className="flex gap-2">
@@ -87,7 +87,7 @@ export default function ProductForm({ product, categories, cost }) {
         <F id="p-desc" label="Описание" span><textarea id="p-desc" rows={4} className="input" {...register("description")} /></F>
       </div>
 
-      <div className="card grid gap-4 p-5 sm:grid-cols-3">
+      <div className="card grid gap-4 p-4 sm:p-5 sm:grid-cols-3">
         <F id="p-price" label="Цена продажи, сом. *" error={errors.price?.message}><input id="p-price" inputMode="decimal" className="input" {...register("price")} /></F>
         <F id="p-old" label="Старая цена (для скидки)" error={errors.old_price?.message} hint="Покажет зачёркнутую цену"><input id="p-old" inputMode="decimal" className="input" {...register("old_price")} /></F>
         <F id="p-cost" label="Закупочная цена, сом." error={errors.cost?.message} hint="Себестоимость единицы. Приход товара пересчитывает её автоматически (средневзвешенно)"><input id="p-cost" inputMode="decimal" className="input" {...register("cost")} /></F>

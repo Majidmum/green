@@ -21,7 +21,7 @@ export default async function CustomersList({ searchParams, basePath, ordersBase
         <button className="btn-primary !py-2.5">Найти</button><Link href={basePath} className="btn-outline !py-2.5">Сбросить</Link>
       </form>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[760px] text-left text-sm">
+        <table className="rt w-full min-w-[760px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Клиент</th><th className="px-4 py-3">Контакты</th><th className="px-4 py-3 text-right">Заказов</th><th className="px-4 py-3 text-right">Выкуплено на</th><th className="px-4 py-3">Последний заказ</th><th className="px-4 py-3">Регистрация</th></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {!data?.length && <tr><td colSpan={6} className="px-4 py-10 text-center text-body/50">Клиентов не найдено</td></tr>}

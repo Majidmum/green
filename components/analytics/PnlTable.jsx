@@ -17,7 +17,7 @@ export default function PnlTable({ kpis }) {
   const margin = n(kpis.revenue) > 0 ? (n(kpis.net_profit) / n(kpis.revenue)) * 100 : null;
   return (
     <div className="card overflow-x-auto">
-      <table className="w-full min-w-[560px] text-left text-sm">
+      <table className="w-full text-left text-sm">
         <tbody className="divide-y divide-heading/5">
           {rows.map((r) => (
             <tr key={r.label} className={r.strong ? "bg-tint/50" : ""}>

@@ -34,7 +34,7 @@ function getIdempotencyKey() {
   }
 }
 
-const card = "card p-6";
+const card = "card p-4 sm:p-6";
 const radioCard =
   "flex cursor-pointer items-start gap-3 rounded-xl border border-heading/15 bg-surface p-4 transition has-[:checked]:border-brand has-[:checked]:bg-tint/50";
 
@@ -136,7 +136,7 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
   const blocked = isSubmitting || hasSoldOut || usable.length === 0 || promo.status === "loading" || (delivery && totals.belowMin);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-8 lg:grid-cols-[1fr_24rem]">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
       <div className="space-y-6">
         <SyncNotes notes={notes} />
         {status === "error" && (
@@ -282,7 +282,7 @@ export default function CheckoutForm({ user, addresses, zones, slots, today }) {
         </section>
       </div>
 
-      <aside className="card h-fit space-y-5 p-6 lg:sticky lg:top-24">
+      <aside className="card h-fit space-y-5 p-4 sm:p-6 lg:sticky lg:top-24">
         <h2 className="font-display text-2xl font-bold text-heading">Ваш заказ</h2>
         <ul className="space-y-2 text-sm">
           {items.map((i) => (

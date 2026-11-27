@@ -41,7 +41,7 @@ export default function StocktakeForm({ products }) {
         <p className="text-sm text-body/60">Заполнено: {filled.length}. Пустые строки не меняются.</p>
       </div>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[520px] text-left text-sm">
+        <table className="rt w-full min-w-[520px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Товар</th><th className="px-4 py-3">По учёту</th><th className="px-4 py-3">Фактически</th><th className="px-4 py-3">Разница</th></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {shown.map((p) => {

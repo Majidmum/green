@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Bell, LogOut, Menu, Store, X } from "lucide-react";
+import ResponsiveTables from "@/components/admin/ResponsiveTables";
 import Logo from "@/components/layout/Logo";
 import { createClient } from "@/lib/supabase/client";
 import { ADMIN_NAV, MANAGER_NAV } from "@/lib/admin/nav";
@@ -62,11 +63,11 @@ export default function StaffShell({ title, navKey, userName, roleLabel, unread 
       )}
 
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-heading/10 bg-surface/90 px-4 py-3 backdrop-blur print:hidden sm:px-6">
+        <header className="sticky top-0 z-30 flex items-center gap-1 border-b border-heading/10 bg-surface/90 px-3 py-2.5 backdrop-blur print:hidden sm:gap-3 sm:px-6 sm:py-3">
           <button className="rounded-full p-2 hover:bg-tint lg:hidden" onClick={() => setOpen(true)} aria-label="Открыть меню"><Menu size={20} /></button>
-          <div className="mr-auto">
-            <p className="text-sm font-semibold text-heading">{title}</p>
-            <p className="text-xs text-body/50">{userName} · {roleLabel}</p>
+          <div className="mr-auto min-w-0 flex-1 pl-1">
+            <p className="truncate text-sm font-semibold text-heading">{title}</p>
+            <p className="hidden truncate text-xs text-body/50 sm:block">{userName} · {roleLabel}</p>
           </div>
           <ThemeToggle className="rounded-full p-2 hover:bg-tint" />
           {notificationsHref && (
@@ -78,7 +79,7 @@ export default function StaffShell({ title, navKey, userName, roleLabel, unread 
           <Link href="/" className="rounded-full p-2 hover:bg-tint" aria-label="На сайт"><Store size={20} /></Link>
           <button className="rounded-full p-2 text-rose-600 hover:bg-rose-50" aria-label="Выйти" onClick={async () => { await createClient().auth.signOut(); router.replace("/"); router.refresh(); }}><LogOut size={20} /></button>
         </header>
-        <main className="p-4 sm:p-6">{children}</main>
+        <main className="min-w-0 p-4 sm:p-6"><ResponsiveTables />{children}</main>
       </div>
     </div>
   );

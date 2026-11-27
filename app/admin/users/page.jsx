@@ -31,7 +31,7 @@ export default async function UsersPage({ searchParams }) {
         <button className="btn-primary !py-2.5">Применить</button><Link href="/admin/users" className="btn-outline !py-2.5">Сбросить</Link>
       </form>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[820px] text-left text-sm">
+        <table className="rt w-full min-w-[820px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Пользователь</th><th className="px-4 py-3">Телефон</th><th className="px-4 py-3">Роль</th><th className="px-4 py-3">Доступ</th><th className="px-4 py-3">Регистрация</th><th className="px-4 py-3" /></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {!data?.length && <tr><td colSpan={6} className="px-4 py-10 text-center text-body/50">Пользователей не найдено</td></tr>}

@@ -15,7 +15,7 @@ export default async function StaffPage({ searchParams }) {
       <PageHeader title="Сотрудники" description="Активность за выбранный период: заказы, которые обработал сотрудник, складские операции и изменения в настройках." />
       <PeriodFilter period={period} basePath="/manager/staff" />
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[680px] text-left text-sm">
+        <table className="rt w-full min-w-[680px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Сотрудник</th><th className="px-4 py-3">Роль</th><th className="px-4 py-3 text-right">Заказов обработано</th><th className="px-4 py-3 text-right">Складских операций</th><th className="px-4 py-3 text-right">Действий в системе</th><th className="px-4 py-3">Последняя активность</th></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {rep.staff.length === 0 && <tr><td colSpan={6} className="px-4 py-8 text-center text-body/50">Сотрудников нет</td></tr>}

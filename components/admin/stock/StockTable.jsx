@@ -46,7 +46,7 @@ export default async function StockTable({ searchParams, basePath }) {
         <button className="btn-primary !py-2.5">Применить</button><Link href={basePath} className="btn-outline !py-2.5">Сбросить</Link>
       </form>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[760px] text-left text-sm">
+        <table className="rt w-full min-w-[760px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Товар</th><th className="px-4 py-3">Категория</th><th className="px-4 py-3 text-right">Остаток</th><th className="px-4 py-3 text-right">Мин.</th><th className="px-4 py-3 text-right">Себест.</th><th className="px-4 py-3 text-right">Стоимость</th><th className="px-4 py-3">Статус</th></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {!rows?.length && <tr><td colSpan={7} className="px-4 py-10 text-center text-body/50">Ничего не найдено</td></tr>}

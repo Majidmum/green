@@ -30,7 +30,7 @@ export default async function FinanceView({ searchParams, basePath }) {
 
       <h2 className="mb-3 mt-8 font-display text-xl font-bold text-heading">Расходы за период</h2>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[560px] text-left text-sm">
+        <table className="rt w-full min-w-[560px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50"><tr><th className="px-4 py-3">Дата</th><th className="px-4 py-3">Категория</th><th className="px-4 py-3">Описание</th><th className="px-4 py-3 text-right">Сумма</th></tr></thead>
           <tbody className="divide-y divide-heading/5">
             {!expenses?.length && <tr><td colSpan={4} className="px-4 py-8 text-center text-body/50">Расходов за период нет</td></tr>}

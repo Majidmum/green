@@ -47,7 +47,7 @@ export default async function StockJournal({ searchParams, basePath }) {
         <div className="flex gap-2 sm:col-span-2 lg:col-span-5"><button className="btn-primary !py-2.5">Применить</button><Link href={basePath} className="btn-outline !py-2.5">Сбросить</Link></div>
       </form>
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[860px] text-left text-sm">
+        <table className="rt w-full min-w-[860px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
             <tr><th className="px-4 py-3">Дата</th><th className="px-4 py-3">Товар</th><th className="px-4 py-3">Операция</th><th className="px-4 py-3 text-right">Изменение</th><th className="px-4 py-3 text-right">Остаток</th><th className="px-4 py-3 text-right">Себест.</th><th className="px-4 py-3">Детали</th></tr>
           </thead>

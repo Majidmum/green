@@ -71,7 +71,7 @@ function ResourceForm({ resourceKey, row, lookups, onDone }) {
         ))}
       </div>
       {error && <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">{error}</p>}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button className="btn-primary" disabled={pending}>{pending ? "Сохраняем…" : "Сохранить"}</button>
         <button type="button" className="btn-outline" onClick={() => onDone(false)}>Отмена</button>
       </div>
@@ -116,7 +116,7 @@ export default function ResourceManager({ resourceKey, rows, lookups = {} }) {
       {error && <p className="mb-3 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">{error}</p>}
 
       <div className="card overflow-x-auto">
-        <table className="w-full min-w-[640px] text-left text-sm">
+        <table className="rt w-full min-w-[640px] text-left text-sm">
           <thead className="border-b border-heading/10 text-xs uppercase tracking-wide text-body/50">
             <tr>{res.columns.map((c) => <th key={c.key} className="px-4 py-3 font-semibold">{c.label}</th>)}<th className="px-4 py-3" /></tr>
           </thead>

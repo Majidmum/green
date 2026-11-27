@@ -82,7 +82,7 @@ export default function OrderActions({ order }) {
             <label htmlFor="cr" className="block text-sm font-medium">Причина отмены</label>
             <input id="cr" className="input" maxLength={300} value={cancelReason} onChange={(e) => setCancelReason(e.target.value)} />
             <p className="text-xs text-body/60">Товар вернётся на склад, клиент получит уведомление.</p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button className="btn !bg-rose-600 !py-2.5 text-white hover:!bg-rose-700" disabled={pending || cancelReason.trim().length < 3}
                 onClick={() => run(() => changeOrderStatus({ orderId: order.id, status: "cancelled", note: cancelReason }), "Заказ отменён")}>Отменить заказ</button>
               <button className="btn-outline !py-2.5" onClick={() => setShowCancel(false)}>Не отменять</button>

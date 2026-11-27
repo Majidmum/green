@@ -10,7 +10,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function Card({ title, children }) {
   return (
-    <section className="card p-5">
+    <section className="card p-4 sm:p-5">
       <h2 className="mb-3 font-display text-lg font-bold text-heading">{title}</h2>
       {children}
     </section>
@@ -46,7 +46,7 @@ export default async function OrderDetail({ supabase, id, base, canEdit }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <Link href={base} className="inline-flex items-center gap-1 text-sm text-brand hover:underline"><ChevronLeft size={16} /> Все заказы</Link>
-          <h1 className="mt-1 flex flex-wrap items-center gap-3 font-display text-3xl font-bold text-heading">Заказ № {o.order_number} <StatusBadge status={o.status} /></h1>
+          <h1 className="mt-1 flex flex-wrap items-center gap-3 font-display text-2xl font-bold text-heading sm:text-3xl">Заказ № {o.order_number} <StatusBadge status={o.status} /></h1>
           <p className="text-sm text-body/60">Создан {formatDate(o.created_at)}{o.delivered_at && ` · доставлен ${formatDate(o.delivered_at)}`}</p>
         </div>
         <Link href={`${base}/${o.id}/print`} className="btn-outline !py-2.5"><Printer size={16} /> Накладная</Link>
@@ -56,7 +56,7 @@ export default async function OrderDetail({ supabase, id, base, canEdit }) {
         <div className="space-y-5 lg:col-span-2">
           <Card title="Состав заказа">
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-left text-sm">
+              <table className="rt w-full min-w-[520px] text-left text-sm">
                 <thead className="text-xs uppercase tracking-wide text-body/50">
                   <tr><th className="py-2">Товар</th><th className="py-2">Кол-во</th><th className="py-2 text-right">Цена</th><th className="py-2 text-right">Себест.</th><th className="py-2 text-right">Сумма</th></tr>
                 </thead>

@@ -89,11 +89,11 @@ export default async function ProductPage({ params }) {
             {product.is_new && <span className="rounded-full bg-brand px-3 py-1 text-xs font-semibold text-white">Новинка</span>}
             {product.is_seasonal && <span className="rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">Сезонный</span>}
           </div>
-          <h1 className="mt-3 font-display text-4xl font-bold text-heading">{product.name}</h1>
+          <h1 className="mt-3 font-display text-3xl font-bold text-heading sm:text-4xl">{product.name}</h1>
           <div className="mt-3"><Stars value={product.rating_avg} count={product.rating_count} size={18} /></div>
 
           <div className="mt-6 flex items-baseline gap-3">
-            <span className="text-4xl font-bold text-heading">{formatMoney(product.price)}</span>
+            <span className="text-3xl font-bold text-heading sm:text-4xl">{formatMoney(product.price)}</span>
             <span className="text-body/60">за {unitLabel(product.unit)}</span>
             {product.old_price && Number(product.old_price) > Number(product.price) && (
               <span className="text-lg text-body/50 line-through">{formatMoney(product.old_price)}</span>

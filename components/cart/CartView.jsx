@@ -47,7 +47,7 @@ export default function CartView({ isLoggedIn }) {
           Не удалось обновить цены и наличие. Итоговая сумма будет пересчитана при оформлении заказа.
         </p>
       )}
-      <div className="grid gap-8 lg:grid-cols-[1fr_22rem]">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <ul className="space-y-4">
           {items.map((i) => (
             <li key={i.productId} className={`card flex gap-4 p-4 ${i.outOfStock ? "opacity-70" : ""}`}>
@@ -94,7 +94,7 @@ export default function CartView({ isLoggedIn }) {
           </li>
         </ul>
 
-        <aside className="card h-fit space-y-5 p-6 lg:sticky lg:top-24">
+        <aside className="card h-fit space-y-5 p-4 sm:p-6 lg:sticky lg:top-24">
           <h2 className="font-display text-2xl font-bold text-heading">Ваш заказ</h2>
           <PromoBox promo={promo} isLoggedIn={isLoggedIn} />
           <dl className="space-y-2 border-t border-heading/10 pt-4 text-sm">
